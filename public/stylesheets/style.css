@@ -7,9 +7,22 @@ a {
   color: #00B7FF;
 }
 
+.navBar {
+  height: 5%;
+  border: solid 3px black;
+  padding: 10px;
+}
+
+.navBar img, h1 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .logo {
   width: 10%;
-  height: 80%;
-  padding: 10%;
+  /*float: left;*/
+  /*display: inline-block;*/
+  /*height: 80%;*/
+  /*padding: 10%;*/
 
 }
