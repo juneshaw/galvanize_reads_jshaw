@@ -1,8 +1,10 @@
-extends layout
+include layout
 
 block content
+  link(rel='stylesheet', href='/stylesheets/login.css')
+  
   div.left
-    h1.sign-in SIGN IN
+    h1.sign-in Sign in with Facebook
     form(action="/" method="POST")
       label.left-label.jura(for="Email") EMAIL ADDRESS / USERNAME:
       input.breaker.text-edit.jura(type="text" name="Email" id="Email")
@@ -15,5 +17,4 @@ block content
   div.right
     div#borderLeft
     h1.sign-up.jura NOT A MEMBER? SIGN UP!
-    h2.jura.info Get into the game! Registration is fast and free!
     input.sign-up-button.jura(type="submit" value="create account")
