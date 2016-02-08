@@ -7,10 +7,26 @@ a {
   color: #00B7FF;
 }
 
-.top {
-  height: 5%;
+.top img, h1 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.navBar {
+  display: inline-block;
+  position: absolute;
+  right: 75px;
+  padding-top: 40px;
   border: solid 3px black;
-  padding: 10px;
+}
+
+.navBar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navBar li {
+  list-style-type: none;
 }
 
 .navBar {
@@ -24,11 +40,6 @@ a {
 }
 
 .navBar li {
-  /*height: 100%;*/
-  /*position:absolute;*/
-  /*right: 75px;*/
-  /*display: inline-block;*/
-  /*vertical-align: middle;*/
   display: inline-block;
   padding: 20px;
   text-align: right;
@@ -43,9 +54,4 @@ a {
   display: inline-block;
   vertical-align: middle;
   width: 10%;
-  /*float: left;*/
-  /*display: inline-block;*/
-  /*height: 80%;*/
-  /*padding: 10%;*/
-
 }
