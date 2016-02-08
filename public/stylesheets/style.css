@@ -7,18 +7,41 @@ a {
   color: #00B7FF;
 }
 
-.navBar {
+.top {
   height: 5%;
   border: solid 3px black;
   padding: 10px;
 }
 
-.navBar img, h1 {
+.navBar {
+  border: solid 3px black;
+  padding-top: 40px;
+  display: inline-block;
+  /*vertical-align: middle;*/
+  position:absolute;
+  right: 75px;
+
+}
+
+.navBar li {
+  /*height: 100%;*/
+  /*position:absolute;*/
+  /*right: 75px;*/
+  /*display: inline-block;*/
+  /*vertical-align: middle;*/
+  display: inline-block;
+  padding: 20px;
+  text-align: right;
+}
+
+.title {
   display: inline-block;
   vertical-align: middle;
 }
 
 .logo {
+  display: inline-block;
+  vertical-align: middle;
   width: 10%;
   /*float: left;*/
   /*display: inline-block;*/
