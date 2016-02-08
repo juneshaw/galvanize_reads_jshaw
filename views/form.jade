@@ -1,0 +1,32 @@
+<form class="restaurantEmployees" action="<%=route %>" method="post">
+  <fieldset>
+    <legend>
+      <% if (neww == 'edit') { %>
+        Edit Employee
+      <% } else { %>
+        New Employee
+      <% } %>
+    </legend>
+    <label for="first_name">First Name</label><br>
+    <input type="text" name="first_name" id="first_name" value = "<%=employee.first_name%>"><br>
+    <label for="last_name">Last Name</label><br>
+    <input type="text" name="last_name" id="last_name" value = "<%=employee.last_name%>"><br>
+    <label for="Position">Position</label><br>
+    <input type="text" name="position" id="Position" value = "<%=employee.position%>"><br>
+    <input type="hidden" name="restaurant_id" value=<%= restaurant_id %>>
+
+
+    <section id = "submitButtons">
+      <input type="submit" value="Submit" class = "goButton">
+      <a href="<%= '/' + restaurant_id + '/admin/edit' %>">
+        <button type = "button" class = "stopButton">Cancel</button>
+      </a>
+      <% if (neww == 'edit') { %>
+      <a href="<%= '/' + restaurant_id + '/admin/employee/' + employee.id + '/delete' %>">
+        <button type = "button" class = "stopButton">Delete</button>
+      </a>
+      <% } %>
+    </section>
+
+  </fieldset>
+</form>
