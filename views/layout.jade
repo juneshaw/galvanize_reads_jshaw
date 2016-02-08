@@ -5,7 +5,11 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='https://fonts.googleapis.com/css?family=Jura:400,500' rel='stylesheet' type='text/css')
   body
-    nav.navBar
+    section.top
       img.logo(src="images/galvanizeLogo.png" alt="")
-      h1 Galvanize Reads
+      h1.title Galvanize Reads
+      nav.navBar
+        a(href="/login")
+          li Login
+      
     block content
