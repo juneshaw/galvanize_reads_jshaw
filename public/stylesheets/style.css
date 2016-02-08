@@ -17,9 +17,16 @@ a {
   position: absolute;
   right: 75px;
   padding-top: 40px;
-  height: 5%;
   border: solid 3px black;
-  padding: 10px;
+}
+
+.navBar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navBar li {
+  list-style-type: none;
 }
 
 .navBar img, h1 {
@@ -29,9 +36,4 @@ a {
 
 .logo {
   width: 10%;
-  /*float: left;*/
-  /*display: inline-block;*/
-  /*height: 80%;*/
-  /*padding: 10%;*/
-
 }
