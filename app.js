@@ -12,6 +12,7 @@ var routes = require('./routes/index');
 var authors = require('./routes/authors');
 var books = require('./routes/books');
 var login = require('./routes/login');
+var authRoutes = require('./routes/auth');
 var passport = require('passport');
 var LinkedInStrategy = require('passport-linkedin').Strategy
 
@@ -60,6 +61,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.use('/', routes);
+app.use('/', authRoutes);
 app.use('/authors', authors);
 app.use('/books', books);
 app.use('/login', login)
