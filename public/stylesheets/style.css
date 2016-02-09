@@ -29,6 +29,10 @@ a {
   list-style-type: none;
 }
 
+.navBar * {
+  padding-left: 20px;
+}
+
 .navBar {
   border: solid 3px black;
   padding-top: 40px;
@@ -42,7 +46,7 @@ a {
 .navBar li {
   display: inline-block;
   padding: 20px;
-  text-align: right;
+  /*text-align: right;*/
 }
 
 .title {

@@ -60,6 +60,12 @@ passport.deserializeUser(function(user, done) {
   done(null, user)
 });
 
+app.use(function (req, res, next) {
+  res.locals.user = req.user
+  console.log('res.locals.user = ', res.locals.user);
+  next()
+})
+
 app.use('/', routes);
 app.use('/', authRoutes);
 app.use('/authors', authors);

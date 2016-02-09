@@ -20,4 +20,8 @@ router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {failure
   res.redirect('/');
 })
 
+router.get('/auth/galvanize', function(req, res, next) {
+  res.render('login/index')
+})
+
 module.exports = router;
