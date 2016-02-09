@@ -1,24 +1,31 @@
 include ../layout
 .top div {
   width: 10%;
-  height: 45%;
+  height: 90%;
+  border: solid 3px black;
+}
+
+.side {
+  width: 10%;
+  height: 50%;
   border: solid 3px black;
 }
 
 .left {
-  display: inline-block;
-  width: 10%;
+  /*display: inline-block;*/
+  /*width: 10%;*/
   border: solid 3px black;
 }
 
 .right {
-  display: inline-block;
-  width: 85%;
+  /*display: inline-block;*/
+  /*width: 85%;*/
   border: solid 3px black;
 }
 
-.left h1 {
-  writing-mode: tb-rl;
+.left h1, .right h1 {
+  display: inline-block;
+  transform: rotate(-90deg);
 }
 
 .selected {
