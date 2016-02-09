@@ -3,3 +3,6 @@ include ../layout
   include layout
     block content2
       h1 Here
+      for book in books
+        div.bookSection
+          h1 book.title
