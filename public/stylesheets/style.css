@@ -1,5 +1,6 @@
 body {
   padding: 50px;
+  height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -16,6 +17,7 @@ form {
 .top img, h1 {
   display: inline-block;
   vertical-align: middle;
+  height: 20%;
 }
 
 .navBar {
@@ -91,5 +93,9 @@ form {
 }
 
 .dropdown a:hover {background-color: #f1f1f1}
+
+.container {
+  height: 80%;
+}
 
 .show {display:block;}

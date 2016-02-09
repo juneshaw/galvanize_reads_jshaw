@@ -14,6 +14,10 @@ module.exports =
   return knex('votes');
 },
 
+  Users: function() {
+  return knex('users');
+},
+
   insertAuthor: function (author) {
    return(Authors().insert(author).select(currval('id')));
 },
@@ -60,6 +64,22 @@ module.exports =
 
   deleteBookContributor: function(id) {
   return(BookContributors().where('id', id).del());
+},
+
+  insertUser: function (user) {
+    return(Users().insert(user).select(currval('id')));
+},
+
+  user: function(id) {
+    return(Users().where('id', id))
+},
+
+  updateUser: function(id, user) {
+    return(Users().where('id', id).update(user));
+},
+
+  deleteUser: function(id) {
+    return(Users().where('id', id).del())
 },
 
 };

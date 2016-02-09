@@ -1,0 +1,10 @@
+form {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.errorMsg {
+  color: red;
+}

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var validate = require('../src/validation.js');
 
 
 
@@ -21,7 +22,10 @@ router.get('/auth/linkedin/callback', passport.authenticate('linkedin', {failure
 })
 
 router.get('/auth/galvanize', function(req, res, next) {
-  res.render('login/index')
+  res.render('auth/index',
+            {'userName': '',
+            'passwordHash': '',
+            'errors': []})
 })
 
 router.post('/auth/galvanize', function(req, res, next) {

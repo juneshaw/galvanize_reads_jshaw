@@ -9,14 +9,12 @@ require('dotenv').load();
 
 
 var routes = require('./routes/index');
+var auth = require('./routes/auth');
 var authors = require('./routes/authors');
 var books = require('./routes/books');
-var login = require('./routes/login');
-var authRoutes = require('./routes/auth');
+// var login = require('./routes/login');
 var passport = require('passport');
 var LinkedInStrategy = require('passport-linkedin').Strategy
-
-
 
 var app = express();
 
@@ -67,10 +65,9 @@ app.use(function (req, res, next) {
 })
 
 app.use('/', routes);
-app.use('/', authRoutes);
+app.use('/', auth);
 app.use('/authors', authors);
 app.use('/books', books);
-app.use('/login', login)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
