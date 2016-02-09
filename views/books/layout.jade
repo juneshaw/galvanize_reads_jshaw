@@ -1,11 +1,8 @@
-include ../layout
 link(rel='stylesheet', href='/stylesheets/books.css')
-
-div.side
-  div.left
-    a(href="/authors")
-      div.top
-        h1.unselected Authors
-    a(href="/books")
-      div.bottom
-        h1.selected Books
+div.left
+  a(href="/authors")
+    div.topSide
+      h1.unselected Authors
+  a(href="/books")
+    div.bottomSide
+      h1.selected Books

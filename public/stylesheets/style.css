@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 10px;
   height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -12,6 +12,10 @@ form {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.top {
+  height: 20%;
 }
 
 .top img, .top h1 {
