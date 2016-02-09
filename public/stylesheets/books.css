@@ -29,7 +29,8 @@ include ../layout
 
 .right {
   display: inline-block;
-  width: 85%;
+  vertical-align:top;
+  width: 80%;
   border: solid 3px black;
 }
 
