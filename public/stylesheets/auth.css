@@ -1,5 +1,6 @@
 form {
   margin: 0;
+  width: 25%;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
