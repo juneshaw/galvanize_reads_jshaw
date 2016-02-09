@@ -7,6 +7,12 @@ a {
   color: #00B7FF;
 }
 
+form {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .top img, h1 {
   display: inline-block;
   vertical-align: middle;

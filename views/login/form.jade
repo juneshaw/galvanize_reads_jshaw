@@ -1,0 +1,15 @@
+form.login(action="login/galvanize" method = "POST")
+  section
+    if (errors.length > 0)
+      for error in errors
+        li.errorMsg error
+  fieldset
+    legend Login
+    
+    label(for="name") User Name
+    input(type = "text", id="name", name="name", placeholder="Enter user name", value = #{username})
+    label(for="password") Password
+    input(type = "password", id="password", name="password", placeholder="Enter password", value = #{password})
+    input(type = "submit")
+    a(href = "/auth/register")
+      button(type="button")Create an Account

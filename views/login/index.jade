@@ -1,20 +1,5 @@
 include layout
 
-block content
-  link(rel='stylesheet', href='/stylesheets/login.css')
-  
-  div.left
-    h1.sign-in Sign in with Facebook
-    form(action="/" method="POST")
-      label.left-label.jura(for="Email") EMAIL ADDRESS / USERNAME:
-      input.breaker.text-edit.jura(type="text" name="Email" id="Email")
-      label.left-label.jura(for="Password") PASSWORD:
-      input.breaker.text-edit(type="text" name="Password" id="Password")
-      input.sign-in-button.jura(type="submit" value="SIGN IN")
-    a(href="/auth/facebook" class="btn btn-primary")
-      img.facebook(src="images/facebook.png", alt="Logo")
+include form
 
-  div.right
-    div#borderLeft
-    h1.sign-up.jura NOT A MEMBER? SIGN UP!
-    input.sign-up-button.jura(type="submit" value="create account")
+block content

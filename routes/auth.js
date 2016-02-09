@@ -24,4 +24,17 @@ router.get('/auth/galvanize', function(req, res, next) {
   res.render('login/index')
 })
 
+router.post('/auth/galvanize', function(req, res, next) {
+  validate.login(req.body).then(function(results) {
+    if (user) {
+      res.redirect('/index')
+    } else {
+      res.render('auth/index',
+      {user_name: req.body.userName,
+      password: req.body.password,
+      errors: results.errors})
+    }
+  })
+})
+
 module.exports = router;
