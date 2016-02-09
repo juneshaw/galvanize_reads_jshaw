@@ -34,7 +34,7 @@ include ../layout
   border: solid 3px black;
 }
 
-.left h1, .right h1 {
+.left h1 {
   display: inline-block;
   width: 100%;
   text-align: left;
