@@ -1,5 +1,8 @@
-extends layout
+include layout
 
-block content
-  //- h1= title
-  //- p Welcome to #{title}
+  a(href="/authors")
+    div.left
+      h1.center Authors
+  a(href="/books")
+    div.right
+      h1.center Books

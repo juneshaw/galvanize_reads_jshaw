@@ -3,15 +3,15 @@ var knex = require('../db/knex')
 module.exports =
 {
   Authors: function() {
-  return knex('users');
+  return knex('authors');
 },
 
   Books: function() {
-  return knex('movies');
+  return knex('books');
 },
 
   BookContributors: function() {
-  return knex('votes');
+  return knex('book_contributors');
 },
 
   Users: function() {
@@ -82,4 +82,7 @@ module.exports =
     return(Users().where('id', id).del())
 },
 
+  userByName: function(user_name) {
+    return(this.Users().where('user_name', user_name));
+  }
 };

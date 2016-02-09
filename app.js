@@ -65,7 +65,7 @@ app.use(function (req, res, next) {
 })
 
 app.use('/', routes);
-app.use('/', auth);
+app.use('/auth', auth);
 app.use('/authors', authors);
 app.use('/books', books);
 

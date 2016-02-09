@@ -1,0 +1,30 @@
+include ../layout
+.top div {
+  width: 10%;
+  height: 45%;
+  border: solid 3px black;
+}
+
+.left {
+  display: inline-block;
+  width: 10%;
+  border: solid 3px black;
+}
+
+.right {
+  display: inline-block;
+  width: 85%;
+  border: solid 3px black;
+}
+
+.left h1 {
+  writing-mode: tb-rl;
+}
+
+.selected {
+  background-color: gray;
+}
+
+.unselected {
+  background-color: white;
+}
