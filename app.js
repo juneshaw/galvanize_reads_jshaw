@@ -62,6 +62,8 @@ app.use(function (req, res, next) {
   res.locals.user = req.user;
   res.cookie("user", "rockyshaws@comcast.net");
   res.cookie("role", "admin");
+  res.cookie("admin", "true");
+  res.locals.admin = "true";
   console.log('res.locals.user = ', res.locals.user);
   next()
 })

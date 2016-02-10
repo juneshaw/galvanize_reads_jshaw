@@ -8,13 +8,20 @@ include ../layout
             a(href="/books/#{book.book.id}")
               img(src="#{book.book.cover_url}")
           section.bookText
-            h1 #{book.book.title}
-            span By 
-            for author, index in book.authors
-              if index > 0
-                span  & 
-              a(href="/authors/#{author.id}")
-                span #{author.first_name} #{author.last_name}
+            section.content
+              h1 #{book.book.title}
+              span By 
+              for author, index in book.authors
+                if index > 0
+                  span  & 
+                a(href="/authors/#{author.id}")
+                  span #{author.first_name} #{author.last_name}
+            if admin
+              section.buttons
+                a(href="/books/#{book.book.id}/edit")
+                  button(type="button") Edit
+                a(href="/books/#{book.book.id}/delete")
+                  button(type="button") Delete
             h5 #{book.book.genre}
             p #{book.book.description}
             

@@ -1,0 +1,35 @@
+section
+  if (errors.length > 0)
+    for error in errors
+      li.errorMsg error
+fieldset
+  label(for="title") Title
+  br
+  input(type = "text", id="title", name="title")
+  br
+  br
+  label(for="genre") Genre
+  br
+  input(type = "text", id="genre", name="genre")
+  br
+  br
+  label(for="cover_url") Cover Image URL
+  br
+  input(type = "text", id="cover_url", name="cover_url")
+  br
+  br
+  label(for="description") Description
+  br
+  textarea(id="description", name="description")
+  br
+  br
+  label(for="authors") Authors
+  br
+  select(name="authors" "multiple")
+    option(selected="selected") Select an Author
+    for author in authors
+      option(value="#{author.id}") #{author.first_name} #{author.last_name}
+  br
+  br
+  
+  input(type = "submit", value = "Add Book")

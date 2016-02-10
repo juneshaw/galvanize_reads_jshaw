@@ -26,6 +26,7 @@ include ../layout
   display: inline-block;
   vertical-align:top;
   width: 80%;
+  height: 80vh;
   border: solid 3px black;
 }
 
@@ -66,6 +67,23 @@ include ../layout
   width: 70%;
   height: 100%;
   border: solid 3px black;
+}
+
+.content {
+  display: inline-block;
+  width: 75%;
+}
+
+.buttons {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  border: solid 3px black;
+}
+
+.buttons button {
+  display: inline-block;
+  margin: 10px;
 }
 
 h5 {
