@@ -59,7 +59,9 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.use(function (req, res, next) {
-  res.locals.user = req.user
+  res.locals.user = req.user;
+  res.cookie("user", "rockyshaws@comcast.net");
+  res.cookie("role", "admin");
   console.log('res.locals.user = ', res.locals.user);
   next()
 })
