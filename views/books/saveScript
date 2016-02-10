@@ -15,3 +15,7 @@ script.
 
 
   removeId.setAttribute("onclick", 'removeAuthor()');
+
+  "<div id = author" + value + "> </div>"
+
+  $('#'+value).append(authorText);

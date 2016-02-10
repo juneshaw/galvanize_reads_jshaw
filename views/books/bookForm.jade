@@ -37,24 +37,28 @@ fieldset
     var addAuthor = function() {
       alert('in the add function');
       var selectList = document.getElementById('authorSelect');
-      console.log('the selectList: ', selectList);
       var index = selectList.selectedIndex;
       var value = selectList[index].value;
-      var authorDiv = "<div id = " + value + "> </div>"
+      
+      var authorDiv = document.createElement('div');
+      authorDiv.setAttribute("id", "author" + value);
+      authorDiv.setAttribute("value", value);
+      
       $('#authorList').append(authorDiv);
+      
       var authorName = selectList[index].text;
       var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
-      $('#'+value).append(authorText);
+      $(authorDiv).append(authorText);
+      
       var removeId = document.createElement('button');
       var id = "btnRemove" + value;
-      var removeId2 = document.getElementById(id);
       removeId.setAttribute("id", "btnRemove" + value);
       removeId.setAttribute("class", "btnRemove");
       removeId.setAttribute("type", "button");
       removeId.setAttribute("value", value);
       removeId.addEventListener('click', function(){removeAuthor(value)});
       removeId.innerHTML = "Remove";
-      $('#authorList').append(removeId);
+      $(authorDiv).append(removeId);
     }
   button.btnAuthor(type="button", onclick='addAuthor()') Add Author
   br
