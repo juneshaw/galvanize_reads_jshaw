@@ -1,10 +1,16 @@
 var express = require('express')
 var router = express.Router()
 var db = require('../src/db.js')
+var validation = require('../src/validation.js')
 
 router.get('/', function(req, res, next) {
-  db.Books().then(function(books) {
-    res.render('books/index', {'books': books})
+  console.log('made it through the get above the render');
+  var bookAuthorPromise = validation.booksAndAuthors();
+  console.log('assigned the promise');
+  bookAuthorPromise.then(function(booksAuthors) {
+    console.log('!!!!!the promised books: ', booksAuthors);
+    res.render('books/index',
+              {'booksAuthors': booksAuthors.booksAuthors})
   })
 })
 

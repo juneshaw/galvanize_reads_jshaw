@@ -24,6 +24,7 @@ include ../layout
 .left {
   display: inline-block;
   width: 10%;
+  height: 75vh;
   border: solid 3px black;
 }
 
@@ -52,5 +53,23 @@ include ../layout
 .bookSection {
   border: solid 3px black;
 }
-  
+
+.bookCover {
+  display: inline-block;
+  width: 25%;
+  height: 50%;
+  border: solid 3px black;
+}
+
+.bookCover img {
+  max-width:100%;
+  max-height:100%;
+}
+
+.bookText {
+  display: inline-block;
+  vertical-align: top;;
+  width: 70%;
+  height: 100%;
+  border: solid 3px black;
 }
