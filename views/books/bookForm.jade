@@ -40,8 +40,13 @@ fieldset
       var authorDiv = "<div id = " + value + "> </div>"
       $('#authorList').append(authorDiv);
       var authorName = selectList[index].text;
-      var authorText = "<h6 id = " + value + ">" + authorName + "</h6>";
+      alert(authorName);
+      var authorText = "<input id = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
       $('#'+value).append(authorText);
+      var removeId = document.createElement('button');
+      removeId.setAttribute("value", index);
+      removeId.setAttribute("text", Remove);
+      $('#authorList').append(removeId);
     }
   button.btnAuthor(type="button", onclick='addAuthor()') Add Author
   br
