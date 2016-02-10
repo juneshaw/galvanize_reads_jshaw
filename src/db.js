@@ -28,7 +28,7 @@ module.exports =
 },
 
  updateAuthor: function(id, author) {
-  return(this.Authors().where('id', id).update(author));
+  return(this.Authors().where('id', id).first().update(author));
 },
 
   deleteAuthor: function(id) {
@@ -43,8 +43,9 @@ module.exports =
   return(this.Books().where('id', id))
 },
 
-  updateBook: function(id, bookContributor) {
-  return(this.Books().where('id', id).update(bookContributor));
+  updateBook: function(id, book) {
+    console.log('in updateBook');
+  return(this.Books().where('id', id).first().update(book));
 },
 
   deleteBook: function(id) {
@@ -60,7 +61,7 @@ module.exports =
 },
 
   updateBookContributor: function(id, bookContributor) {
-  return(this.BookContributors().where('id', id).update(bookContributor));
+  return(this.BookContributors().where('id', id).first().update(bookContributor));
 },
 
   deleteBookContributor: function(id) {
@@ -76,7 +77,7 @@ module.exports =
 },
 
   updateUser: function(id, user) {
-    return(this.Users().where('id', id).update(user));
+    return(this.Users().where('id', id).first().update(user));
 },
 
   deleteUser: function(id) {

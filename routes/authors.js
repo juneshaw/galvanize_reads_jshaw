@@ -20,7 +20,7 @@ router.get('/edit/:id', function(req, res, next) {
 })
 
 router.post('/edit/:id', function(req, res, next) {
-  db.updateAuthor(req.body).then( function() {
+  db.updateAuthor(req.params.id, req.body).then( function() {
     res.redirect('/authors/#authors_id')
   })
 })

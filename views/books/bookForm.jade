@@ -1,66 +1,80 @@
-section
-  if (errors.length > 0)
-    for error in errors
-      li.errorMsg error
-fieldset
-  label(for="title") Title
-  br
-  input(type = "text", id="title", name="title")
-  br
-  br
-  label(for="genre") Genre
-  br
-  input(type = "text", id="genre", name="genre")
-  br
-  br
-  label(for="cover_url") Cover Image URL
-  br
-  input(type = "text", id="cover_url", name="cover_url")
-  br
-  br
-  label(for="description") Description
-  br
-  textarea.textDescription(id="description", name="description")
-  br
-  br
-  label(for="authorList") Authors
-  br
-  div.textAuthors(id="authorList", name="authorList")
-  select#authorSelect(name="authors" )
-    for author in authors
-      option(value="#{author.id}") #{author.first_name} #{author.last_name}
-  script.
-    var removeAuthor = function(authorId) {
-      alert('in the remove button '+authorId);
-    }
-  script.
-    var addAuthor = function() {
-      alert('in the add function');
-      var selectList = document.getElementById('authorSelect');
-      var index = selectList.selectedIndex;
-      var value = selectList[index].value;
-      
-      var authorDiv = document.createElement('div');
-      authorDiv.setAttribute("id", "author" + value);
-      authorDiv.setAttribute("value", value);
-      
-      $('#authorList').append(authorDiv);
-      
-      var authorName = selectList[index].text;
-      var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
-      $(authorDiv).append(authorText);
-      
-      var removeId = document.createElement('button');
-      var id = "btnRemove" + value;
-      removeId.setAttribute("id", "btnRemove" + value);
-      removeId.setAttribute("class", "btnRemove");
-      removeId.setAttribute("type", "button");
-      removeId.setAttribute("value", value);
-      removeId.addEventListener('click', function(){removeAuthor(value)});
-      removeId.innerHTML = "Remove";
-      $(authorDiv).append(removeId);
-    }
-  button.btnAuthor(type="button", onclick='addAuthor()') Add Author
-  br
-  br
-  input(type = "submit", value = "Add Book")
+form.login(action="/books/#{book.id}/edit" method = "POST")
+  section
+    if (errors.length > 0)
+      for error in errors
+        li.errorMsg error
+  fieldset
+    label(for="title") Title
+    br
+    input(type = "text", id="title", name="title", value = "#{book.title}")
+    br
+    br
+    label(for="genre") Genre
+    br
+    input(type = "text", id="genre", name="genre", value = "#{book.genre}")
+    br
+    br
+    label(for="cover_url") Cover Image URL
+    br
+    input(type = "text", id="cover_url", name="cover_url", value  = "{book.cover_url}")
+    br
+    br
+    label(for="description") Description
+    br
+    textarea.textDescription(id="description", name="description", value = "{book.description}")
+    br
+    br
+    label(for="authorList") Authors
+    br
+    div.textAuthors(id="authorList", name="authorList")
+    
+    
+    
+    br
+    for author,index in authors
+      input(type="hidden", id="authorName"+index, name="author"+index, value="#{author.first_name}")
+    select#authorSelect(name="authors" )
+      for author in authors
+        option(value="#{author.id}") #{author.first_name} #{author.last_name}
+    
+    script.
+      var removeAuthor = function(authorDiv, authorId) {
+        $(authorDiv).remove();
+        var authorInput = document.getElementById('authorName'+authorId);
+        authorInput.value="";
+      }
+    script.
+      var addAuthor = function() {
+        var selectList = document.getElementById('authorSelect');
+        var index = selectList.selectedIndex;
+        var value = selectList[index].value;
+        
+        
+        var authorDiv = document.createElement('div');
+        var authorId = "author" + value;
+        authorDiv.setAttribute("id", authorId);
+        authorDiv.setAttribute("value", value);
+        
+        $('#authorList').append(authorDiv);
+        
+        var authorName = selectList[index].text;
+        var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
+        $(authorDiv).append(authorText);
+        
+        var authorInput = document.getElementById('authorName' + value);
+        authorInput.value = authorName;
+        
+        var removeId = document.createElement('button');
+        var id = "btnRemove" + value;
+        removeId.setAttribute("id", "btnRemove" + value);
+        removeId.setAttribute("class", "btnRemove");
+        removeId.setAttribute("type", "button");
+        removeId.setAttribute("value", value);
+        removeId.addEventListener('click', function(){removeAuthor(authorDiv, value)});
+        removeId.innerHTML = "Remove";
+        $(authorDiv).append(removeId);
+      }
+    button.btnAuthor(type="button", onclick='addAuthor()') Add Author
+    br
+    br
+    input(type = "submit", value = "Add Book")

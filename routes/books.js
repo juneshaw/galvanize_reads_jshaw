@@ -41,19 +41,30 @@ router.post('/delete/:id', function(req, res, next) {
 })
 
 router.get('/:id/edit', function(req, res, next) {
-  db.book(req.params.id).then(function(book) {
-    db.Authors().then(function(authors) {
-      res.render('books/edit',
-                  {'book': book,
-                  'authors': authors,
-                  'errors': []})
+  db.book(req.params.id).first().then(function(book) {
+    db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
+      db.Authors().then(function(authors) {
+        res.render('books/edit',
+                    {'book': book,
+                      'bookContributors': bookContributors,
+                    'authors': authors,
+                    'errors': []})
+      })
     })
   })
 })
 
 router.post('/:id/edit', function(req, res, next) {
-  db.updateBook(req.body).then( function() {
-    res.redirect('/books/#book_id')
+  console.log('req.body: ', req.body);
+  db.updateBook(req.params.id,
+    {title: req.body.title,
+      genre: req.body.genre,
+      cover_url: req.body.cover_url,
+      description: req.body.description}).then( function() {
+      db.Authors().count().then(function(count) {
+        console.log('author count: ', count);
+        res.redirect('/books/req.params.id')
+      })
   })
 })
 

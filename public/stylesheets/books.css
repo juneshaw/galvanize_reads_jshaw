@@ -87,6 +87,7 @@ include ../layout
 }
 
 .btnAuthor {
+  display: inline-block;
   background-color: #DDDDDD;
 }
 
@@ -117,12 +118,14 @@ a {
 
 .btnRemove {
   display: inline-block;
-  width: 30px;
+  width: 60px;
 }
 
 #authorSelect {
-
+  display: inline-block;;
 }
-#divAuthorList {
-  border: solid 3px black;
+
+#authorList {
+  width: 70%;
+  border: solid 1px black;
 }
