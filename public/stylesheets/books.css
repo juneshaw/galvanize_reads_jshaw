@@ -116,7 +116,7 @@ a {
 }
 
 .btnRemove {
-  display: block;
+  width: 30px;
 }
 
 #authorSelect {
