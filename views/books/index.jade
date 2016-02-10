@@ -8,4 +8,12 @@ include ../layout
             img(src="#{book.book.cover_url}")
           section.bookText
             h1 #{book.book.title}
+            span By 
+            for author, index in book.authors
+              if index > 0
+                span  & 
+              span #{author.first_name} #{author.last_name}
+            i #{book.book.genre}
+            
+              
             

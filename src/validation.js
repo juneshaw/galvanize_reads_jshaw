@@ -25,11 +25,13 @@ booksAndAuthors: function() {
                         'authors': []};
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
+        
         db.bookContributorsByBook(book.id).then(function(contributors) {
           console.log('here are the contributors', contributors);
           contributors.forEach(function(contributor, authorIndex) {
+
             console.log('here is the contributor!!!!: ', contributor);
-            db.author(contributor.author_id).then(function(author) {
+            db.author(contributor.author_id).first().then(function(author) {
               console.log('pushing an author', author);
               booksAuthors[bookIndex]['authors'].push(author);
               console.log('booksAuthors authors: ', booksAuthors[bookIndex]['authors']);
