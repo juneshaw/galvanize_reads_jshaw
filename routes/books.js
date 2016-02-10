@@ -4,11 +4,8 @@ var db = require('../src/db.js')
 var validation = require('../src/validation.js')
 
 router.get('/', function(req, res, next) {
-  console.log('made it through the get above the render');
   var bookAuthorPromise = validation.booksAndAuthors();
-  console.log('assigned the promise');
   bookAuthorPromise.then(function(booksAuthors) {
-    console.log('!!!!!the promised books: ', booksAuthors);
     res.render('books/index',
               {'booksAuthors': booksAuthors.booksAuthors})
   })
@@ -53,7 +50,8 @@ router.post('/delete/:id', function(req, res, next) {
   })
 })
 
-router.get('/#id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
+  console.log('got to the id link');
   db.book(req.params.id).then(function(book) {
     res.render('books/show', {'book': book})
   })

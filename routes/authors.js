@@ -8,13 +8,13 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/edit/#id', function(req, res, next) {
+router.get('/edit/:id', function(req, res, next) {
   db.authors(req.params.id).then(function(authors) {
     res.render('authors/edit', {'authors': authors})
   })
 })
 
-router.post('/edit/#id', function(req, res, next) {
+router.post('/edit/:id', function(req, res, next) {
   db.updateAuthor(req.body).then( function() {
     res.redirect('/authors/#authors_id')
   })
@@ -47,7 +47,7 @@ router.post('/delete/:id', function(req, res, next) {
   })
 })
 
-router.get('/#id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   db.authors(req.params.id).then(function(authors) {
     res.render('authors/authors', {'authors': authors})
   })

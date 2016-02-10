@@ -5,7 +5,7 @@ include ../layout
       for book in booksAuthors
         section.bookSection
           section.bookCover
-            a(href="/#{book.book.id}")
+            a(href="/books/#{book.book.id}")
               img(src="#{book.book.cover_url}")
           section.bookText
             h1 #{book.book.title}
