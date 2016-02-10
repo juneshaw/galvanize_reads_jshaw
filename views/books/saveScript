@@ -1,0 +1,14 @@
+script.
+  var addAuthor = function() {
+    var selectList = document.getElementById('authorSelect');
+    var index = selectList.selectedIndex;
+    alert(selectList[index].value);
+    var value = selectList[index].value;
+    alert('value = '+value);
+    var authorDiv = "<div id = " + value + "> </div>"
+    $('#authorList').append(authorDiv);
+    var authorName = selectList[index].text;
+    alert('text = '+authorName);
+    var authorText = "<h6 id = " + value + ">" + authorName + "</h6>";
+    $('#'+value).append(authorText);
+  }

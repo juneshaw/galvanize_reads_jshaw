@@ -25,7 +25,7 @@ fieldset
   br
   label(for="authorList") Authors
   br
-  textarea.textAuthors(id="authorList", name="authorList")
+  div.textAuthors(id="authorList", name="authorList")
   section.sectionAuthorRemove
     for author in authors
       button.btnRemove Remove
@@ -36,14 +36,14 @@ fieldset
     var addAuthor = function() {
       var selectList = document.getElementById('authorSelect');
       var index = selectList.selectedIndex;
-      alert(selectList[index].value);
       var value = selectList[index].value;
-      alert('value = ', value);
       var authorDiv = "<div id = " + value + "> </div>"
       $('#authorList').append(authorDiv);
+      var authorName = selectList[index].text;
+      var authorText = "<h6 id = " + value + ">" + authorName + "</h6>";
+      $('#'+value).append(authorText);
     }
   button.btnAuthor(type="button", onclick='addAuthor()') Add Author
   br
   br
-  
   input(type = "submit", value = "Add Book")

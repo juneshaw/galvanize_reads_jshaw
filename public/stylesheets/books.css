@@ -120,5 +120,8 @@ a {
 }
 
 #authorSelect {
-  
+
+}
+#divAuthorList {
+  border: solid 3px black;
 }
