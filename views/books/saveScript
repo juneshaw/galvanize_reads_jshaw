@@ -12,3 +12,6 @@ script.
     var authorText = "<h6 id = " + value + ">" + authorName + "</h6>";
     $('#'+value).append(authorText);
   }
+
+
+  removeId.setAttribute("onclick", 'removeAuthor()');

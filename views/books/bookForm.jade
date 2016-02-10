@@ -30,8 +30,14 @@ fieldset
     for author in authors
       option(value="#{author.id}") #{author.first_name} #{author.last_name}
   script.
+    var removeAuthor = function(authorId) {
+      alert('in the remove button '+authorId);
+    }
+  script.
     var addAuthor = function() {
+      alert('in the add function');
       var selectList = document.getElementById('authorSelect');
+      console.log('the selectList: ', selectList);
       var index = selectList.selectedIndex;
       var value = selectList[index].value;
       var authorDiv = "<div id = " + value + "> </div>"
@@ -40,8 +46,13 @@ fieldset
       var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
       $('#'+value).append(authorText);
       var removeId = document.createElement('button');
-      removeId.setAttribute("class", "btnRemove")
+      var id = "btnRemove" + value;
+      var removeId2 = document.getElementById(id);
+      removeId.setAttribute("id", "btnRemove" + value);
+      removeId.setAttribute("class", "btnRemove");
+      removeId.setAttribute("type", "button");
       removeId.setAttribute("value", value);
+      removeId.addEventListener('click', function(){removeAuthor(value)});
       removeId.innerHTML = "Remove";
       $('#authorList').append(removeId);
     }

@@ -116,6 +116,7 @@ a {
 }
 
 .btnRemove {
+  display: inline-block;
   width: 30px;
 }
 
