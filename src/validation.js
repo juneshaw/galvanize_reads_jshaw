@@ -14,24 +14,23 @@ login: function(loginInputs) {
   })
 },
 
-booksAndAuthors: function() {
+booksAndAuthors: function(books) {
   return new Promise(function (resolve, reject) {
     var booksAuthors = [];
     var authors = [];
-    db.Books().then(function(books) {
-      books.forEach(function(book, bookIndex) {
-        var bookToAdd = {'book': book,
-                        'authors': []};
-        booksAuthors.push(bookToAdd);
-        booksAuthors[bookIndex]['authors'] = [];
-        db.bookContributorsByBook(book.id).then(function(contributors) {
-          contributors.forEach(function(contributor, authorIndex) {
-            db.author(contributor.author_id).first().then(function(author) {
-              booksAuthors[bookIndex]['authors'].push(author);
-              if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
-                resolve({'booksAuthors': booksAuthors});
-              }
-            })
+    // db.Books().then(function(books) {
+    books.forEach(function(book, bookIndex) {
+      var bookToAdd = {'book': book,
+                      'authors': []};
+      booksAuthors.push(bookToAdd);
+      booksAuthors[bookIndex]['authors'] = [];
+      db.bookContributorsByBook(book.id).then(function(contributors) {
+        contributors.forEach(function(contributor, authorIndex) {
+          db.author(contributor.author_id).first().then(function(author) {
+            booksAuthors[bookIndex]['authors'].push(author);
+            if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
+              resolve({'booksAuthors': booksAuthors});
+            }
           })
         })
       })
