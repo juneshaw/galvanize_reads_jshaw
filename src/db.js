@@ -89,6 +89,10 @@ module.exports =
 
   bookContributorsByBook: function(book_id) {
     return(this.BookContributors().where('book_id', book_id));
+  },
+
+  bookContributorsByAuthor: function(author_id) {
+    return(this.BookContributors().where('author_id', author_id));
   }
 
 };

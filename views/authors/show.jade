@@ -1,0 +1,20 @@
+include ../layout
+  block content
+  include layout
+    block content2
+      section.authorSection
+        section.authorPortrait
+          a(href="/authors/#{author.author.id}")
+            img(src="#{author.author.portrait_url}")
+        section.authorText
+          section.authorBio
+            h1 #{author.author.first_name} #{author.author.last_name}
+            p #{author.author.biography}
+          section.authorBooks
+            fieldset
+              legend Books
+              for book in author.books
+                h4.bookTitle #{book.title}
+            
+              
+            

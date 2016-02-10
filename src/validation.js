@@ -38,4 +38,28 @@ booksAndAuthors: function(books) {
   })
 },
 
+authorsAndBooks: function(authors) {
+  return new Promise(function (resolve, reject) {
+    var authorsBooks = [];
+    var books = [];
+    // db.Books().then(function(books) {
+    authors.forEach(function(author, authorIndex) {
+      var authorToAdd = {'author': author,
+                      'books': []};
+      authorsBooks.push(authorToAdd);
+      authorsBooks[authorIndex]['books'] = [];
+      db.bookContributorsByAuthor(author.id).then(function(contributors) {
+        contributors.forEach(function(contributor, bookIndex) {
+          db.book(contributor.book_id).first().then(function(book) {
+            authorsBooks[authorIndex]['books'].push(book);
+            if ((bookIndex >= (contributors.length-1)) && (authorIndex >= (authors.length-1))) {
+              resolve({'authorsBooks': authorsBooks});
+            }
+          })
+        })
+      })
+    })
+  })
+},
+
 }

@@ -1,10 +1,15 @@
 var express = require('express')
 var router = express.Router()
 var db = require('../src/db.js')
+var validation = require('../src/validation.js')
 
 router.get('/', function(req, res, next) {
   db.Authors().then(function(authors) {
-    res.render('authors/index', {'authors': authors})
+    var authorBookPromise = validation.authorsAndBooks(authors);
+    authorBookPromise.then(function(authorsBooks) {
+      res.render('authors/index',
+                {'authorsBooks': authorsBooks.authorsBooks})
+    })
   })
 });
 
@@ -48,8 +53,13 @@ router.post('/delete/:id', function(req, res, next) {
 })
 
 router.get('/:id', function(req, res, next) {
-  db.authors(req.params.id).then(function(authors) {
-    res.render('authors/authors', {'authors': authors})
+  db.author(req.params.id).then(function(authors) {
+    var authorBookPromise = validation.authorsAndBooks(authors);
+    authorBookPromise.then(function(authorsBooks) {
+      console.log('got to the id link');
+      res.render('authors/show',
+                  {'author': authorsBooks.authorsBooks[0]})
+    })
   })
 })
 
