@@ -86,6 +86,10 @@ include ../layout
   margin: 10px;
 }
 
+.btnAuthor {
+  background-color: #DDDDDD;
+}
+
 h5 {
   font-style: italic;
 }
@@ -93,4 +97,24 @@ h5 {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.textDescription {
+  height: 30px;
+}
+
+.textAuthors {
+  height: 60px;
+  display: inline-block;
+}
+
+.sectionAuthorRemove {
+  display: inline-block;
+  vertical-align: top;
+  height: 60px;
+  border: solid 3px black;
+}
+
+.btnRemove {
+  display: block;
 }

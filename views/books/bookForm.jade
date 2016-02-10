@@ -20,15 +20,20 @@ fieldset
   br
   label(for="description") Description
   br
-  textarea(id="description", name="description")
+  textarea.textDescription(id="description", name="description")
   br
   br
   label(for="authors") Authors
   br
-  select(name="authors" "multiple")
-    option(selected="selected") Select an Author
+  textarea.textAuthors(id="authors", name="authors")
+  if admin
+    section.sectionAuthorRemove
+      for author in authors
+        button.btnRemove Remove      
+  select(name="authors" )
     for author in authors
       option(value="#{author.id}") #{author.first_name} #{author.last_name}
+  button.btnAuthor Add Author
   br
   br
   
