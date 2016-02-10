@@ -15,7 +15,5 @@ include ../layout
               fieldset
                 legend Books
                 for book in author.books
-                  h4.bookTitle #{book.title}
-            
-              
-            
+                  a(href="/books/#{book.id}")
+                    h4.bookTitle #{book.title}

@@ -80,3 +80,8 @@ include ../layout
 .bookTitle {
   margin: 5px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

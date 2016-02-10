@@ -12,7 +12,8 @@ include ../layout
           for author, index in book.authors
             if index > 0
               span  & 
-            span #{author.first_name} #{author.last_name}
+            a(href="/authors/#{author.id}")
+              span #{author.first_name} #{author.last_name}
           h5 #{book.book.genre}
           p #{book.book.description}
             
