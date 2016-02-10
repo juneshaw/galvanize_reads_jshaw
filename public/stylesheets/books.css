@@ -73,3 +73,7 @@ include ../layout
   height: 100%;
   border: solid 3px black;
 }
+
+h5 {
+  font-style: italic;
+}

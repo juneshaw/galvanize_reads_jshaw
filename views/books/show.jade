@@ -1,0 +1,20 @@
+include ../layout
+  block content
+  include layout
+    block content2
+      section.bookSection
+        section.bookCover
+          a(href="books/#{book.id}")
+            img(src="#{book.cover_url}")
+        section.bookText
+          h1 #{book.title}
+          span By 
+          for author, index in book.authors
+            if index > 0
+              span  & 
+            span #{author.first_name} #{author.last_name}
+          h5 #{book.genre}
+          p #{book.description}
+            
+              
+            

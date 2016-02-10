@@ -5,7 +5,8 @@ include ../layout
       for book in booksAuthors
         section.bookSection
           section.bookCover
-            img(src="#{book.book.cover_url}")
+            a(href="/#{book.book.id}")
+              img(src="#{book.book.cover_url}")
           section.bookText
             h1 #{book.book.title}
             span By 
@@ -13,7 +14,8 @@ include ../layout
               if index > 0
                 span  & 
               span #{author.first_name} #{author.last_name}
-            i #{book.book.genre}
+            h5 #{book.book.genre}
+            p #{book.book.description}
             
               
             

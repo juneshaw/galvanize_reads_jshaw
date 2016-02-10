@@ -55,7 +55,7 @@ router.post('/delete/:id', function(req, res, next) {
 
 router.get('/#id', function(req, res, next) {
   db.book(req.params.id).then(function(book) {
-    res.render('books/book', {'book': book})
+    res.render('books/show', {'book': book})
   })
 })
 
