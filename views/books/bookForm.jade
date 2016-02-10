@@ -23,17 +23,26 @@ fieldset
   textarea.textDescription(id="description", name="description")
   br
   br
-  label(for="authors") Authors
+  label(for="authorList") Authors
   br
-  textarea.textAuthors(id="authors", name="authors")
-  if admin
-    section.sectionAuthorRemove
-      for author in authors
-        button.btnRemove Remove      
-  select(name="authors" )
+  textarea.textAuthors(id="authorList", name="authorList")
+  section.sectionAuthorRemove
+    for author in authors
+      button.btnRemove Remove
+  select#authorSelect(name="authors" )
     for author in authors
       option(value="#{author.id}") #{author.first_name} #{author.last_name}
-  button.btnAuthor Add Author
+  script.
+    var addAuthor = function() {
+      var selectList = document.getElementById('authorSelect');
+      var index = selectList.selectedIndex;
+      alert(selectList[index].value);
+      var value = selectList[index].value;
+      alert('value = ', value);
+      var authorDiv = "<div id = " + value + "> </div>"
+      $('#authorList').append(authorDiv);
+    }
+  button.btnAuthor(type="button", onclick='addAuthor()') Add Author
   br
   br
   
