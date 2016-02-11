@@ -23,5 +23,5 @@ include ../layout
               for book in author.books
                 a(href="/books/#{book.id}")
                   h4.bookTitle #{book.title}
-      form.login(action="/books/#{book.book.id}/delete" method = "POST")
-        input.btnLarge(type = "submit", value = "Delete Book?")
+      form.login(action="/authors/#{author.author.id}/delete" method = "POST")
+        input.btnLarge(type = "submit", value = "Delete Author?")

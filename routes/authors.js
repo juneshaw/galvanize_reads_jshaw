@@ -24,14 +24,18 @@ router.post('/new', function(req, res, next) {
 })
 
 router.get('/:id/delete', function(req, res, next) {
+  console.log('in the author delete');
   db.author(req.params.id).then(function(authors) {
-    var bookAuthorPromise = validation.booksAndAuthors(authors);
-    bookAuthorPromise.then(function(authorsBooks) {
-      res.render('books/delete',
-                  {'author': authorsBooks.authorsBooks[0]})    })
+    console.log('just got the authors: ', authors);
+    var authorBookPromise = validation.authorsAndBooks(authors);
+    authorBookPromise.then(function(authorsBooks) {
+      console.log('back from the promise with authorsBooks', authorsBooks);
+      console.log('sending to delete:', authorsBooks.authorsBooks[0])
+      res.render('authors/delete',
+                  {'author': authorsBooks.authorsBooks[0]})
+    })
   })
 })
-
 
 //What should I do if they want to delete an author that is a contributor?
 //Just remove the author from the book contributors?

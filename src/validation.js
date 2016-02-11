@@ -53,6 +53,7 @@ authorsAndBooks: function(authors) {
           db.book(contributor.book_id).first().then(function(book) {
             authorsBooks[authorIndex]['books'].push(book);
             if ((bookIndex >= (contributors.length-1)) && (authorIndex >= (authors.length-1))) {
+              console.log('done and about to resolve!!!');
               resolve({'authorsBooks': authorsBooks});
             }
           })
