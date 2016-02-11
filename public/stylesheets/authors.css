@@ -55,7 +55,7 @@ include ../layout
   display: inline-block;
   width: 25%;
   height: 50%;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .authorPortrait img {
@@ -93,12 +93,12 @@ a {
   color: inherit;
 }
 
-.buttons {
+/*.buttons {
   display: inline-block;
   vertical-align: top;
   width: 20%;
   /*border: solid 3px black;*/
-}
+}*/
 
 .buttons button {
   display: inline-block;
@@ -147,6 +147,20 @@ a {
 #authorList {
   width: 70%;
   border: solid 1px black;
+}
+
+.buttons {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  height: 30px;
+  /*border: solid 3px black;*/
+}
+
+.buttons button {
+  display: inline-block;
+  margin: 10px;
+  height: 40px;
 }
 
 .btnLarge {
