@@ -23,7 +23,6 @@ module.exports =
 },
 
   author: function(id) {
-    console.log('author id required: ', id);
   return(this.Authors().where('id', id))
 },
 
@@ -44,7 +43,6 @@ module.exports =
 },
 
   updateBook: function(id, book) {
-    console.log('in updateBook');
   return(this.Books().where('id', id).first().update(book));
 },
 
@@ -66,14 +64,6 @@ module.exports =
 
   deleteBookContributor: function(id) {
   return(this.BookContributors().where('id', id).del());
-},
-
-  deleteBookContributorsAll: function(bookContributors) {
-    bookContributors.forEach(function(contributor) {
-      this.deleteBookContributor(contributor.id).then(function() {
-        console.log('bookContributors', bookContributors);
-      })
-    })
 },
 
   insertUser: function (user) {

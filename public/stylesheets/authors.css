@@ -69,6 +69,11 @@ include ../layout
   border: solid 3px black;
 }
 
+.content {
+  display: inline-block;
+  width: 75%;
+}
+
 .authorBio {
 
 }
@@ -84,4 +89,65 @@ include ../layout
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.buttons {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+  border: solid 3px black;
+}
+
+.buttons button {
+  display: inline-block;
+  margin: 10px;
+}
+
+.btnAuthor {
+  display: inline-block;
+  background-color: #DDDDDD;
+}
+
+h5 {
+  font-style: italic;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.textDescription {
+  height: 30px;
+}
+
+.textAuthors {
+  height: 60px;
+  display: inline-block;
+}
+
+.sectionAuthorRemove {
+  display: inline-block;
+  vertical-align: top;
+  height: 60px;
+  border: solid 3px black;
+}
+
+.btnRemove {
+  display: inline-block;
+  width: 60px;
+}
+
+#authorSelect {
+  display: inline-block;;
+}
+
+#authorList {
+  width: 70%;
+  border: solid 1px black;
+}
+
+.btnLarge {
+  height: 50px;
+  background-color: #DDDDDD;
 }

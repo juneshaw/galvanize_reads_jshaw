@@ -13,18 +13,6 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/edit/:id', function(req, res, next) {
-  db.authors(req.params.id).then(function(authors) {
-    res.render('authors/edit', {'authors': authors})
-  })
-})
-
-router.post('/edit/:id', function(req, res, next) {
-  db.updateAuthor(req.params.id, req.body).then( function() {
-    res.redirect('/authors/#authors_id')
-  })
-})
-
 router.get('/new', function(req, res, next) {
   res.render('authors/new')
 })
@@ -35,8 +23,8 @@ router.post('/new', function(req, res, next) {
   })
 })
 
-router.get('/delete/:id', function(req, res, next) {
-  db.authors(req.params.id).then(function(authors) {
+router.get('/:id/delete', function(req, res, next) {
+  db.author(req.params.id).then(function(authors) {
     res.render('authors/delete', {'authors': authors})
   })
 })
@@ -46,9 +34,43 @@ router.get('/delete/:id', function(req, res, next) {
 //Or make it not selectable, but still shown as a contributor?
 //What should the click through of the author show on an old book, though?
 
-router.post('/delete/:id', function(req, res, next) {
+router.post('/:id/delete', function(req, res, next) {
   db.deleteAuthor(req.params.id).then(function() {
     res.redirect('/authors');
+  })
+})
+
+router.get('/:id/edit', function(req, res, next) {
+  db.author(req.params.id).first().then(function(author) {
+    db.bookContributorsByAuthor(req.params.id).then(function(bookContributors) {
+      console.log('!!!!', bookContributors)
+      db.Books().then(function(books) {
+        res.render('authors/edit',
+                    {'author': author,
+                      'bookContributors': bookContributors,
+                    'books': books,
+                    'errors': []})
+      })
+    })
+  })
+})
+
+router.post('/:id/edit', function(req, res, next) {
+  db.updateAuthor(req.params.id, req.body).then( function() {
+    res.redirect('/authors/#authors_id')
+  })
+})
+
+router.post('/:id/edit', function(req, res, next) {
+  db.updateAuthor(req.params.id,
+    {first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      portrait_url: req.body.portrait_url,
+      biography: req.body.biography}).then( function() {
+    db.Books().count().then(function(count) {
+      console.log('book count: ', count);
+      res.redirect('/books/'+req.params.id)
+    })
   })
 })
 
