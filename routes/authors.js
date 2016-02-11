@@ -35,7 +35,8 @@ router.post('/new', function(req, res, next) {
                   'portrait_url': req.body.portrait_url}
   db.insertAuthor(newAuthor).then( function(results) {
                     console.log('results from insert:', results);
-    res.redirect('/')
+                    //add code to add bookContributors
+    res.redirect('/authors')
   })
 })
 

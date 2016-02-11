@@ -14,7 +14,30 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/new', function(req, res, next) {
-  res.render('books/new')
+    db.Authors().then(function(authors) {
+      res.render('books/new',
+                  {'book': {'title':'', 'genre':'', 'cover_url':'', 'description':''},
+                  'bookContributors': [],
+                  'authors': authors,
+                  'errors': []})
+  })
+});
+
+router.post('/new', function(req, res, next) {
+  console.log('in the new post');
+  var newBook = {'title':req.body.title,
+                  'genre': req.body.genre,
+                  'cover_url': req.body.cover_url,
+                  'description': req.body.description}
+  db.insertBook(newBook).then( function(results) {
+    console.log('results from insertBook: ', results);
+    // req.body.authors.forEach(function(author) {
+      // db.insertBookContributors({'book_id': results.id,
+                                // 'author_id': author.id}).then(function() {
+        res.redirect('/books')
+      // })
+    // })
+  })
 })
 
 router.post('/new', function(req, res, next) {
