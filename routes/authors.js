@@ -44,12 +44,12 @@ router.get('/:id/delete', function(req, res, next) {
   console.log('in the author delete');
   db.author(req.params.id).then(function(authors) {
     console.log('just got the authors: ', authors);
-    var authorBookPromise = validation.authorsAndBooks(authors);
+    var authorBookPromise = validation.authorsAndBooksOne(req.params.id);
     authorBookPromise.then(function(authorsBooks) {
       console.log('back from the promise with authorsBooks', authorsBooks);
       console.log('sending to delete:', authorsBooks.authorsBooks[0])
       res.render('authors/delete',
-                  {'author': authorsBooks.authorsBooks[0]})
+                  {'author': authorsBooks.authorsBooks})
     })
   })
 });
@@ -100,12 +100,12 @@ router.post('/:id/edit', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  db.author(req.params.id).then(function(authors) {
-    var authorBookPromise = validation.authorsAndBooks(authors);
+  db.author(req.params.id).first().then(function(authors) {
+    var authorBookPromise = validation.authorsAndBooksOne(req.params.id);
     authorBookPromise.then(function(authorsBooks) {
       console.log('got to the id link');
       res.render('authors/show',
-                  {'author': authorsBooks.authorsBooks[0]})
+                  {'author': authorsBooks.authorsBooks})
     })
   })
 });
