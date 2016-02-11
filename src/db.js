@@ -19,6 +19,7 @@ module.exports =
 },
 
   insertAuthor: function (author) {
+    console.log('in insertAuthor');
    return(this.Authors().insert(author));
 },
 
