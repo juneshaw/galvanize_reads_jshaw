@@ -1,0 +1,27 @@
+include ../layout
+  block content
+  include layout
+    block content2
+      section.authorSection
+        section.authorPortrait
+          a(href="/authors/#{author.author.id}")
+            img(src="#{author.author.portrait_url}")
+        section.authorText
+          section.content
+            section.authorBio
+              h1 #{author.author.first_name} #{author.author.last_name}
+              p #{author.author.biography}
+          if admin
+            section.buttons
+              a(href="/authors/#{author.author.id}/edit")
+                button(type="button") Edit
+              a(href="/authors/#{author.author.id}/delete")
+                button(type="button") Delete
+          section.authorBooks
+            fieldset
+              legend Books
+              for book in author.books
+                a(href="/books/#{book.id}")
+                  h4.bookTitle #{book.title}
+      form.login(action="/books/#{book.book.id}/delete" method = "POST")
+        input.btnLarge(type = "submit", value = "Delete Book?")

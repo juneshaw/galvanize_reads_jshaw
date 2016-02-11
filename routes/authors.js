@@ -25,9 +25,13 @@ router.post('/new', function(req, res, next) {
 
 router.get('/:id/delete', function(req, res, next) {
   db.author(req.params.id).then(function(authors) {
-    res.render('authors/delete', {'authors': authors})
+    var bookAuthorPromise = validation.booksAndAuthors(authors);
+    bookAuthorPromise.then(function(authorsBooks) {
+      res.render('books/delete',
+                  {'author': authorsBooks.authorsBooks[0]})    })
   })
 })
+
 
 //What should I do if they want to delete an author that is a contributor?
 //Just remove the author from the book contributors?
@@ -35,8 +39,14 @@ router.get('/:id/delete', function(req, res, next) {
 //What should the click through of the author show on an old book, though?
 
 router.post('/:id/delete', function(req, res, next) {
-  db.deleteAuthor(req.params.id).then(function() {
-    res.redirect('/authors');
+  db.bookContributorsByAuthor(req.params.id).then(function(bookContributors) {
+    bookContributors.forEach(function(contributor) {
+      db.deleteBookContributor(contributor.id).then(function() {
+        db.deleteAuthor(req.params.id).then(function() {
+          res.redirect('/authors');
+        })
+      })
+    })
   })
 })
 
@@ -52,12 +62,6 @@ router.get('/:id/edit', function(req, res, next) {
                     'errors': []})
       })
     })
-  })
-})
-
-router.post('/:id/edit', function(req, res, next) {
-  db.updateAuthor(req.params.id, req.body).then( function() {
-    res.redirect('/authors/#authors_id')
   })
 })
 

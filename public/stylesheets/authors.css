@@ -23,10 +23,12 @@ include ../layout
   border: solid 3px black;
 }
 
+
 .right {
   display: inline-block;
   vertical-align:top;
   width: 80%;
+  height: 80vh;
   border: solid 3px black;
 }
 
