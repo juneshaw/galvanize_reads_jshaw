@@ -19,7 +19,7 @@ module.exports =
 },
 
   insertAuthor: function (author) {
-   return(this.Authors().insert(author).select(currval('id')));
+   return(this.Authors().insert(author));
 },
 
   author: function(id) {
@@ -35,7 +35,7 @@ module.exports =
 },
 
   insertBook: function(book) {
-  return(this.Books().insert(book).select(currval('id')));
+  return(this.Books().insert(book));
 },
 
   book: function(id) {
@@ -51,7 +51,7 @@ module.exports =
 },
 
   insertBookContributor: function(bookContributor) {
-    return(this.BookContributors().insert(bookContributor).select(currval('id')));
+    return(this.BookContributors().insert(bookContributor));
 },
 
   bookContributor: function (id) {
@@ -67,7 +67,7 @@ module.exports =
 },
 
   insertUser: function (user) {
-    return(this.Users().insert(user).select(currval('id')));
+    return(this.Users().insert(user));
 },
 
   user: function(id) {
@@ -84,14 +84,21 @@ module.exports =
 
   userByName: function(user_name) {
     return(this.Users().where('user_name', user_name));
-  },
+},
+
+  authorDefaults: function(id) {
+    return({'first_name': "", 'last_name': "", 'biography': "", 'portrait_url': ""});
+},
+
+  bookDefaults: function() {
+    return({'title': "", 'genre': "", 'portrait_url': "", 'description': ""});
+},
 
   bookContributorsByBook: function(book_id) {
     return(this.BookContributors().where('book_id', book_id));
-  },
+},
 
   bookContributorsByAuthor: function(author_id) {
     return(this.BookContributors().where('author_id', author_id));
-  }
-
+},
 };

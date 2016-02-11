@@ -4,9 +4,11 @@ var db = require('../src/db.js')
 var validation = require('../src/validation.js')
 
 router.get('/', function(req, res, next) {
+  console.log('in the main author page');
   db.Authors().then(function(authors) {
     var authorBookPromise = validation.authorsAndBooks(authors);
     authorBookPromise.then(function(authorsBooks) {
+      console.log('got back from the promise');
       res.render('authors/index',
                 {'authorsBooks': authorsBooks.authorsBooks})
     })
@@ -14,12 +16,26 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', function(req, res, next) {
-  res.render('authors/new')
-})
+  console.log('entered the new, getting the books');
+    db.Books().then(function(books) {
+      console.log('got the books, rendering the page');
+      res.render('authors/new',
+                  {'author': {first_name:'', last_name:'', biography:'', portrait_url:''},
+                    'bookContributors': [],
+                  'books': books,
+                  'errors': []})
+  })
+});
 
 router.post('/new', function(req, res, next) {
-  db.insertAuthor(req.body).then( function() {
-    res.redirect('/authors')
+  console.log('in the post for new');
+  var newAuthor = {'first_name':req.body.first_name,
+                  'last_name': req.body.last_name,
+                  'biography': req.body.biography,
+                  'portrait_url': req.body.portrait_url}
+  db.insertAuthor(newAuthor).then( function(results) {
+                    console.log('results from insert:', results);
+    res.redirect('/')
   })
 })
 
@@ -35,7 +51,7 @@ router.get('/:id/delete', function(req, res, next) {
                   {'author': authorsBooks.authorsBooks[0]})
     })
   })
-})
+});
 
 //What should I do if they want to delete an author that is a contributor?
 //Just remove the author from the book contributors?
@@ -52,7 +68,7 @@ router.post('/:id/delete', function(req, res, next) {
       })
     })
   })
-})
+});
 
 router.get('/:id/edit', function(req, res, next) {
   db.author(req.params.id).first().then(function(author) {
@@ -67,7 +83,7 @@ router.get('/:id/edit', function(req, res, next) {
       })
     })
   })
-})
+});
 
 router.post('/:id/edit', function(req, res, next) {
   db.updateAuthor(req.params.id,
@@ -80,7 +96,7 @@ router.post('/:id/edit', function(req, res, next) {
       res.redirect('/books/'+req.params.id)
     })
   })
-})
+});
 
 router.get('/:id', function(req, res, next) {
   db.author(req.params.id).then(function(authors) {
@@ -91,6 +107,6 @@ router.get('/:id', function(req, res, next) {
                   {'author': authorsBooks.authorsBooks[0]})
     })
   })
-})
+});
 
 module.exports = router;

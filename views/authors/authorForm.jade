@@ -1,107 +1,106 @@
-form.login(action="/authors/#{author.id}/edit" method = "POST")
-  section
-    if (errors.length > 0)
-      for error in errors
-        li.errorMsg error
-  fieldset
-    label(for="first_name") First Name
-    br
-    input(type = "text", id="first_name", name="first_name", value = "#{author.first_name}")
-    br
-    br
-    label(for="last_name") Last Name
-    br
-    input(type = "text", id="last_name", name="last_name", value = "#{author.last_name}")
-    br
-    br
-    label(for="portrait_url") Portrait URL
-    br
-    input(type = "text", id="portrait_url", name="portrait_url", value  = "#{author.portrait_url}")
-    br
-    br
-    label(for="biography") Biography
-    br
-    input.textDescription(type = "text", id="biography", name="biography", value  = "#{author.biography}")
-    br
-    br
-    label(for="bookList") Books
-    br
-    div.textBooks(id="bookList", name="bookList")
-      for bookContributor, index in bookContributors
-        fillBook(index, #{bookContributor.title})
-    br
-    for book,index in books
-      input(type="hidden", id="bookName"+index, name="book"+index, value="#{book.title}")
-    select#bookSelect(name="books" )
-      for book in books
-        option(value="#{book.id}") #{book.title}
-    
-    script.
-      var removeBook = function(bookDiv, bookId) {
-        $(bookDiv).remove();
-        var bookInput = document.getElementById('bookName'+bookId);
-        bookInput.value="";
-      }
-    script.
-      var addBook = function() {
-        var selectList = document.getElementById('bookSelect');
-        var index = selectList.selectedIndex;
-        var value = selectList[index].value;
-        
-        
-        var bookDiv = document.createElement('div');
-        var bookId = "book" + value;
-        bookDiv.setAttribute("id", bookId);
-        bookDiv.setAttribute("value", value);
-        
-        $('#bookList').append(bookDiv);
-        
-        var bookName = selectList[index].text;
-        var bookText = "<input name = bookSelect[" + value + "], value = \"" + bookName +  "\">" + "</input>";
-        $(bookDiv).append(bookText);
-        
-        var bookInput = document.getElementById('bookName' + value);
-        bookInput.value = bookName;
-        
-        var removeId = document.createElement('button');
-        var id = "btnRemove" + value;
-        removeId.setAttribute("id", "btnRemove" + value);
-        removeId.setAttribute("class", "btnRemove");
-        removeId.setAttribute("type", "button");
-        removeId.setAttribute("value", value);
-        removeId.addEventListener('click', function(){removeBook(bookDiv, value)});
-        removeId.innerHTML = "Remove";
-        $(bookDiv).append(removeId);
-      }
-    script.
-      var fillBook= function(idIn, bookNameIn) {
-        alert('im in fillBook');
-        var value = id;
-        var bookDiv = document.createElement('div');
-        var bookId = "book" + value;
-        bookDiv.setAttribute("id", bookId);
-        bookDiv.setAttribute("value", value);
-        
-        $('#bookList').append(bookDiv);
-        
-        var bookName = bookNameIn;
-        var bookText = "<input name = bookSelect[" + value + "], value = \"" + bookName +  "\">" + "</input>";
-        $(bookDiv).append(bookText);
-        
-        var bookInput = document.getElementById('bookName' + value);
-        bookInput.value = bookName;
-        
-        var removeId = document.createElement('button');
-        var id = "btnRemove" + value;
-        removeId.setAttribute("id", "btnRemove" + value);
-        removeId.setAttribute("class", "btnRemove");
-        removeId.setAttribute("type", "button");
-        removeId.setAttribute("value", value);
-        removeId.addEventListener('click', function(){removeBook(bookDiv, value)});
-        removeId.innerHTML = "Remove";
-        $(bookDiv).append(removeId);
-      }
-    button.btnBook(type="button", onclick='addBook()') Add Book
-    br
-    br
-    input(type = "submit", value = "Update Author")
+section
+  if (errors.length > 0)
+    for error in errors
+      li.errorMsg error
+fieldset
+  label(for="first_name") First Name
+  br
+  input(type = "text", id="first_name", name="first_name", value = "#{author.first_name}")
+  br
+  br
+  label(for="last_name") Last Name
+  br
+  input(type = "text", id="last_name", name="last_name", value = "#{author.last_name}")
+  br
+  br
+  label(for="portrait_url") Portrait URL
+  br
+  input(type = "text", id="portrait_url", name="portrait_url", value  = "#{author.portrait_url}")
+  br
+  br
+  label(for="biography") Biography
+  br
+  input.textDescription(type = "text", id="biography", name="biography", value  = "#{author.biography}")
+  br
+  br
+  label(for="bookList") Books
+  br
+  div.textBooks(id="bookList", name="bookList")
+    for bookContributor, index in bookContributors
+      fillBook(index, #{bookContributor.title})
+  br
+  for book,index in books
+    input(type="hidden", id="bookName"+index, name="book"+index, value="#{book.title}")
+  select#bookSelect(name="books" )
+    for book in books
+      option(value="#{book.id}") #{book.title}
+  
+  script.
+    var removeBook = function(bookDiv, bookId) {
+      $(bookDiv).remove();
+      var bookInput = document.getElementById('bookName'+bookId);
+      bookInput.value="";
+    }
+  script.
+    var addBook = function() {
+      var selectList = document.getElementById('bookSelect');
+      var index = selectList.selectedIndex;
+      var value = selectList[index].value;
+      
+      
+      var bookDiv = document.createElement('div');
+      var bookId = "book" + value;
+      bookDiv.setAttribute("id", bookId);
+      bookDiv.setAttribute("value", value);
+      
+      $('#bookList').append(bookDiv);
+      
+      var bookName = selectList[index].text;
+      var bookText = "<input name = bookSelect[" + value + "], value = \"" + bookName +  "\">" + "</input>";
+      $(bookDiv).append(bookText);
+      
+      var bookInput = document.getElementById('bookName' + value);
+      bookInput.value = bookName;
+      
+      var removeId = document.createElement('button');
+      var id = "btnRemove" + value;
+      removeId.setAttribute("id", "btnRemove" + value);
+      removeId.setAttribute("class", "btnRemove");
+      removeId.setAttribute("type", "button");
+      removeId.setAttribute("value", value);
+      removeId.addEventListener('click', function(){removeBook(bookDiv, value)});
+      removeId.innerHTML = "Remove";
+      $(bookDiv).append(removeId);
+    }
+  script.
+    var fillBook= function(idIn, bookNameIn) {
+      alert('im in fillBook');
+      var value = id;
+      var bookDiv = document.createElement('div');
+      var bookId = "book" + value;
+      bookDiv.setAttribute("id", bookId);
+      bookDiv.setAttribute("value", value);
+      
+      $('#bookList').append(bookDiv);
+      
+      var bookName = bookNameIn;
+      var bookText = "<input name = bookSelect[" + value + "], value = \"" + bookName +  "\">" + "</input>";
+      $(bookDiv).append(bookText);
+      
+      var bookInput = document.getElementById('bookName' + value);
+      bookInput.value = bookName;
+      
+      var removeId = document.createElement('button');
+      var id = "btnRemove" + value;
+      removeId.setAttribute("id", "btnRemove" + value);
+      removeId.setAttribute("class", "btnRemove");
+      removeId.setAttribute("type", "button");
+      removeId.setAttribute("value", value);
+      removeId.addEventListener('click', function(){removeBook(bookDiv, value)});
+      removeId.innerHTML = "Remove";
+      $(bookDiv).append(removeId);
+    }
+  button.btnBook(type="button", onclick='addBook()') Add Book
+  br
+  br
+  input(type = "submit", value = "Submit")
