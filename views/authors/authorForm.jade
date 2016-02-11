@@ -1,0 +1,66 @@
+section
+  if (errors.length > 0)
+    for error in errors
+      li.errorMsg error
+fieldset
+  label(for="first_name") First Name
+  br
+  input(type = "text", id="first_name", name="first_name")
+  br
+  br
+  label(for="last_name") Last Name
+  br
+  input(type = "text", id="last_name", name="last_name")
+  br
+  br
+  label(for="portrait_url") Portrait URL
+  br
+  input(type = "text", id="portrait_url", name="portrait_url")
+  br
+  br
+  label(for="description") Biography
+  br
+  textarea.textDescription(id="biography", name="biography")
+  br
+  br
+  label(for="bookList") Books
+  br
+  div.textBooks(id="bookList", name="bookList")
+  select#bookSelect(name="books" )
+    for book in books
+      option(value="#{book.id}") #{book.title}
+  script.
+    var removeBook = function(bookId) {
+      alert('in the remove button '+authorId);
+    }
+  script.
+    var addAuthor = function() {
+      alert('in the add function');
+      var selectList = document.getElementById('authorSelect');
+      var index = selectList.selectedIndex;
+      var value = selectList[index].value;
+      
+      var authorDiv = document.createElement('div');
+      authorDiv.setAttribute("id", "author" + value);
+      authorDiv.setAttribute("value", value);
+      
+      $('#authorList').append(authorDiv);
+      
+      var authorName = selectList[index].text;
+      var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
+      $(authorDiv).append(authorText);
+      
+      var removeId = document.createElement('button');
+      var id = "btnRemove" + value;
+      removeId.setAttribute("id", "btnRemove" + value);
+      removeId.setAttribute("class", "btnRemove");
+      removeId.setAttribute("type", "button");
+      removeId.setAttribute("value", value);
+      removeId.addEventListener('click', function(){removeAuthor(value)});
+      removeId.innerHTML = "Remove";
+      $(authorDiv).append(removeId);
+    }
+  button.btnAuthor(type="button", onclick='addAuthor()') Add Author
+  br
+  br
+  input(type = "submit", value = "Add Book")
