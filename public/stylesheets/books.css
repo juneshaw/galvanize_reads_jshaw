@@ -2,7 +2,7 @@ include ../layout
 .top div {
   width: 10%;
   height: 90%;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .topSide {
@@ -19,7 +19,7 @@ include ../layout
   display: inline-block;
   width: 10%;
   height: 75vh;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .right {
@@ -27,7 +27,7 @@ include ../layout
   vertical-align:top;
   width: 80%;
   height: 80vh;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .left h1 {
@@ -46,7 +46,8 @@ include ../layout
 }
 
 .bookSection {
-  border: solid 3px black;
+  margin:15px;
+  /*border: solid 3px black;*/
 }
 
 .bookCover {
@@ -63,10 +64,11 @@ include ../layout
 
 .bookText {
   display: inline-block;
+  padding: 15px;
   vertical-align: top;
   width: 70%;
   height: 100%;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .content {
@@ -78,12 +80,14 @@ include ../layout
   display: inline-block;
   vertical-align: top;
   width: 20%;
-  border: solid 3px black;
+  height: 30px;
+  /*border: solid 3px black;*/
 }
 
 .buttons button {
   display: inline-block;
   margin: 10px;
+  height: 40px;
 }
 
 .btnAuthor {
@@ -113,7 +117,7 @@ a {
   display: inline-block;
   vertical-align: top;
   height: 60px;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .btnRemove {

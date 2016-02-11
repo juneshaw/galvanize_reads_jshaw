@@ -23,5 +23,5 @@ include ../layout
                 button(type="button") Delete
           h5 #{book.book.genre}
           p #{book.book.description}
-      form.login(action="/books/#{book.book.id}/delete" method = "POST")
+      form.centerButton(action="/books/#{book.book.id}/delete" method = "POST")
         input.btnLarge(type = "submit", value = "Delete Book?")

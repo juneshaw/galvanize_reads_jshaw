@@ -3,7 +3,7 @@ include ../layout
 .top div {
   width: 10%;
   height: 90%;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .topSide {
@@ -20,7 +20,7 @@ include ../layout
   display: inline-block;
   width: 10%;
   height: 75vh;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 
@@ -29,7 +29,7 @@ include ../layout
   vertical-align:top;
   width: 80%;
   height: 80vh;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .left h1 {
@@ -48,7 +48,7 @@ include ../layout
 }
 
 .authorSection {
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .authorPortrait {
@@ -68,7 +68,7 @@ include ../layout
   vertical-align: top;
   width: 70%;
   height: 100%;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .content {
@@ -97,7 +97,7 @@ a {
   display: inline-block;
   vertical-align: top;
   width: 20%;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .buttons button {

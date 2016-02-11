@@ -8,12 +8,17 @@ a {
   color: #00B7FF;
 }
 
-form {
+.formCenter {
   width: 50%;
   margin: 0 auto;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.centerButton {
+  width: 50%;
+  margin: 0 auto;
 }
 
 form input {
@@ -27,12 +32,17 @@ textarea {
 
 .top {
   height: 20%;
+  border: solid 1px black;
 }
 
 .top img, .top h1 {
   display: inline-block;
   vertical-align: middle;
-  height: 20%;
+  height: 60%;
+}
+
+.top h1 {
+  font-size: 30px;
 }
 
 .navBar {
@@ -40,7 +50,7 @@ textarea {
   position: absolute;
   right: 75px;
   padding-top: 40px;
-  border: solid 3px black;
+  /*border: solid 3px black;*/
 }
 
 .navBar a {
@@ -57,7 +67,7 @@ textarea {
 }
 
 .navBar {
-  border: solid 3px black;
+  /*border: solid 3px black;*/
   padding-top: 40px;
   display: inline-block;
   /*vertical-align: middle;*/
@@ -117,9 +127,8 @@ textarea {
   display: inline-block;
   width: 45%;
   /*height: 90%;*/
-  height: 100%;
+  height: 80vh;
   margin: 10px;
-  border: solid 3px black;
 }
 
 .center {

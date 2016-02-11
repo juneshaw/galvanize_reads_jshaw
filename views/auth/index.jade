@@ -1,6 +1,6 @@
 include ../layout
   link(rel='stylesheet', href='/stylesheets/auth.css')
-  form.login(action="galvanize" method = "POST")
+  form.formCenter(action="galvanize" method = "POST")
     section
       if (errors.length > 0)
         for error in errors

@@ -94,7 +94,7 @@ router.post('/:id/edit', function(req, res, next) {
       biography: req.body.biography}).then( function() {
     db.Books().count().then(function(count) {
       console.log('book count: ', count);
-      res.redirect('/books/'+req.params.id)
+      res.redirect('/authors/'+req.params.id)
     })
   })
 });
