@@ -54,10 +54,10 @@ router.post('/new', function(req, res, next) {
 
 router.get('/:id/delete', function(req, res, next) {
   db.book(req.params.id).then(function(books) {
-    var bookAuthorPromise = validation.booksAndAuthors(books);
+    var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
     bookAuthorPromise.then(function(booksAuthors) {
       res.render('books/delete',
-                  {'book': booksAuthors.booksAuthors[0]})    })
+                  {'book': booksAuthors.booksAuthors})    })
   })
 })
 
@@ -103,10 +103,11 @@ router.post('/:id/edit', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   db.book(req.params.id).then(function(books) {
-    var bookAuthorPromise = validation.booksAndAuthors(books);
+    var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
     bookAuthorPromise.then(function(booksAuthors) {
+      console.log('booksAuthors: ****************', booksAuthors);
       res.render('books/show',
-                  {'book': booksAuthors.booksAuthors[0]})
+                  {'book': booksAuthors.booksAuthors})
     })
   })
 })
