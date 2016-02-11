@@ -11,6 +11,10 @@ html
       img.logo(src="/images/galvanizeLogo.png" alt="")
       h1.title Galvanize Reads
       nav.navBar
+        if admin
+          a(href='/authors/new') Add New Author
+          a(href='/books/new') Add New Book
+          
         if user
           span Hello #{user.displayName}!
           a(href='/auth/logout') Logout
