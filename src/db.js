@@ -68,6 +68,14 @@ module.exports =
   return(this.BookContributors().where('id', id).del());
 },
 
+  deleteBookContributorsAll: function(bookContributors) {
+    bookContributors.forEach(function(contributor) {
+      this.deleteBookContributor(contributor.id).then(function() {
+        console.log('bookContributors', bookContributors);
+      })
+    })
+},
+
   insertUser: function (user) {
     return(this.Users().insert(user).select(currval('id')));
 },

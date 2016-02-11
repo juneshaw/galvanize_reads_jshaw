@@ -129,3 +129,8 @@ a {
   width: 70%;
   border: solid 1px black;
 }
+
+.btnLarge {
+  height: 50px;
+  background-color: #DDDDDD;
+}

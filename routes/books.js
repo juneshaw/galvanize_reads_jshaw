@@ -28,15 +28,30 @@ router.post('/new', function(req, res, next) {
   })
 })
 
-router.get('/delete/:id', function(req, res, next) {
-  db.book(req.params.id).then(function(book) {
-    res.render('books/delete', {'book': book})
+router.get('/:id/delete', function(req, res, next) {
+  console.log('req.params.id', req.params.id);
+  db.book(req.params.id).then(function(books) {
+    var bookAuthorPromise = validation.booksAndAuthors(books);
+    bookAuthorPromise.then(function(booksAuthors) {
+      console.log('got to the delete link');
+      res.render('books/delete',
+                  {'book': booksAuthors.booksAuthors[0]})    })
   })
 })
 
-router.post('/delete/:id', function(req, res, next) {
-  db.deleteBook(req.params.id).then(function(book) {
-    res.redirect('/books');
+router.post('/:id/delete', function(req, res, next) {
+  console.log('req.params.id', req.params.id);
+  db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
+    console.log('!!!bookContributors', bookContributors);
+    bookContributors.forEach(function(contributor) {
+      db.deleteBookContributor(contributor.id).then(function() {
+        console.log('req.params.id', req.params.id);
+        db.deleteBook(req.params.id).then(function() {
+          console.log('req.params.id', req.params.id);
+          res.redirect('/books');
+        })
+      })
+    })
   })
 })
 
@@ -63,7 +78,7 @@ router.post('/:id/edit', function(req, res, next) {
       description: req.body.description}).then( function() {
       db.Authors().count().then(function(count) {
         console.log('author count: ', count);
-        res.redirect('/books/req.params.id')
+        res.redirect('/books/'+req.params.id)
       })
   })
 })

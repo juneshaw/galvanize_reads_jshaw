@@ -19,3 +19,5 @@ script.
   "<div id = author" + value + "> </div>"
 
   $('#'+value).append(authorText);
+
+    //- textarea.textDescription(id="description", name="description", value = "#{book.description}")
