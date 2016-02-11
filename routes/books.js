@@ -31,6 +31,7 @@ router.post('/new', function(req, res, next) {
                   'description': req.body.description}
   db.insertBook(newBook).then( function(results) {
     console.log('results from insertBook: ', results);
+    console.log('****', req.body.author1, req.body.author2);
     // req.body.authors.forEach(function(author) {
       // db.insertBookContributors({'book_id': results.id,
                                 // 'author_id': author.id}).then(function() {

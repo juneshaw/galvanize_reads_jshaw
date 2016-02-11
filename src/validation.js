@@ -45,20 +45,14 @@ authorsAndBooks: function(authors) {
     var books = [];
     db.Authors().then(function(authors) {
       authors.forEach(function(author, authorIndex) {
-        console.log('************');
         var authorToAdd = {'author': author,
                         'books': []};
-        console.log('getting books for author # ', authorIndex, author.id, ' ', author.first_name);
         authorsBooks.push(authorToAdd);
         db.bookContributorsByAuthor(author.id).then(function(contributors) {
           contributors.forEach(function(contributor, bookIndex) {
             db.book(contributor.book_id).first().then(function(book) {
-              console.log('==============');
-              console.log('book#', bookIndex, ' ', book, ' for that author');
               authorsBooks[authorIndex]['books'].push(book);
               if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
-                console.log('finished on authorIndex of ', authorIndex, 'bookIndex of ', bookIndex);
-
                 resolve({'authorsBooks': authorsBooks});
               }
             })
