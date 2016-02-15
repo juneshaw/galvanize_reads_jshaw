@@ -31,7 +31,7 @@ fieldset
       fillAuthor(index, #{bookContributor.first_name} + #{bookContributor.last_name})
   br
   for author,index in authors
-    input(type="hidden", id="authorName"+index, name="author"+index, value="#{author.first_name}")
+    input(id="authorName"+index, name="author[]", value="")
   select#authorSelect(name="authors" )
     for author in authors
       option(value="#{author.id}") #{author.first_name} #{author.last_name}
@@ -57,6 +57,7 @@ fieldset
       $('#authorList').append(authorDiv);
       
       var authorName = selectList[index].text;
+      console.log('authorName from select list: ', authorName)
       var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
       $(authorDiv).append(authorText);
       
@@ -74,18 +75,17 @@ fieldset
       $(authorDiv).append(removeId);
     }
   script.
-    var fillAuthor = function(idIn, authorNameIn) {
+    var fillAuthor = function(idIn, authorName) {
       alert('im in fillAuthor');
       var value = id;
       var authorDiv = document.createElement('div');
       var authorId = "author" + value;
-      authorDiv.setAttribute("id", authorId);
+      authorDiv.setAttribute("id", "author");
       authorDiv.setAttribute("value", value);
       
       $('#authorList').append(authorDiv);
       
-      var authorName = authorNameIn;
-      var authorText = "<input name = authorSelect[" + value + "], value = \"" + authorName +  "\">" + "</input>";
+      var authorText = "<input name = authorSelect, value = \"" + authorName +  "\">" + "</input>";
       $(authorDiv).append(authorText);
       
       var authorInput = document.getElementById('authorName' + value);

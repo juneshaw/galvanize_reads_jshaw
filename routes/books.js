@@ -30,25 +30,22 @@ router.post('/new', function(req, res, next) {
                   'cover_url': req.body.cover_url,
                   'description': req.body.description}
   db.insertBook(newBook).then( function(results) {
-    console.log('results from insertBook: ', results);
-    console.log('****', req.body.author1, req.body.author2);
-    // req.body.authors.forEach(function(author) {
-      // db.insertBookContributors({'book_id': results.id,
-                                // 'author_id': author.id}).then(function() {
-        res.redirect('/books')
-      // })
-    // })
-  })
-})
-
-router.post('/new', function(req, res, next) {
-  db.insertBook(req.body).then(function(book_id) {
-    req.body.authors.forEach(function(author) {
-      db.insertBookContributors({'book_id': book_id,
-                                'author_id': author.id}).then(function() {
-        res.redirect('/books')
-      })
+    req.body.author.forEach(function(author, index) {
+      console.log('author in post for new book: ', author, 'id: ', index);
     })
+
+    // db.Authors().count().then(function(author) {
+    //   for (var i = 1; i < count; i++) {
+    //     var name = "author" + i;
+    //     console.log('name = ', name);
+    //   }
+    // })
+    // console.log('****', req.body.author0,   req.body.author1, req.body.author2);
+    //   db.insertBookContributors({'book_id': book_id,
+    //   'author_id': author.id}).then(function() {
+    //     res.redirect('/books')
+    //   })
+    // })
   })
 })
 
