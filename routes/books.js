@@ -73,13 +73,23 @@ router.post('/:id/delete', function(req, res, next) {
 
 router.get('/:id/edit', function(req, res, next) {
   db.book(req.params.id).first().then(function(book) {
-    db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
-      db.Authors().then(function(authors) {
-        res.render('books/edit',
-                    {'book': book,
-                      'bookContributors': bookContributors,
-                    'authors': authors,
-                    'errors': []})
+    db.Authors().then(function(authors) {
+      var bookAuthors =[];
+      db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
+        var numContributorsProcessed = 0;
+        bookContributors.forEach(function(bookContributor, contributorIndex) {
+          db.author(bookContributor.author_id).first().then(function(author) {
+            bookAuthors.push(author);
+            if (bookAuthors.length === bookContributors.length) {
+              res.render('books/edit',
+              {'book': book,
+              'bookContributors': bookContributors,
+              'bookAuthors': bookAuthors,
+              'authors': authors,
+              'errors': []})
+            }
+          })
+        })
       })
     })
   })
