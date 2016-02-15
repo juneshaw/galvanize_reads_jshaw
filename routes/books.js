@@ -31,10 +31,8 @@ router.post('/new', function(req, res, next) {
                   'description': req.body.description}
   db.insertBook(newBook).then( function(results) {
     console.log('results from insertBook: ', results);
-    // req.body.authors.forEach(function(author) {
       // db.insertBookContributors({'book_id': results.id,
                                 // 'author_id': author.id}).then(function() {
-        res.redirect('/books')
       // })
     // })
   })
@@ -93,10 +91,14 @@ router.post('/:id/edit', function(req, res, next) {
       genre: req.body.genre,
       cover_url: req.body.cover_url,
       description: req.body.description}).then( function() {
-    db.Authors().count().then(function(count) {
-      console.log('author count: ', count);
-      res.redirect('/books/'+req.params.id)
+    console.log('req.body***********: ', req.body);
+    req.body.authorSelectNames.forEach(function(authorSelectName, index) {
+      console.log('author of array for new book: ', authorSelectName, 'index: ', index);
     })
+      // res.redirect('/books')
+    // db.Authors().count().then(function(count) {
+      // console.log('author count: ', count);
+    res.redirect('/books/'+req.params.id)
   })
 })
 

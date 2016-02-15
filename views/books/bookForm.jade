@@ -31,8 +31,8 @@ fieldset
       fillAuthor(index, #{bookContributor.first_name} + #{bookContributor.last_name})
   br
   for author,index in authors
-    input(type="hidden", id="authorName"+index, name="author"+index, value="#{author.first_name}")
-  select#authorSelect(name="authors" )
+    input(type="hidden", id="authorName"+index, name="authorSelectNames", value="#{author.first_name}")
+  select#authorSelect
     for author in authors
       option(value="#{author.id}") #{author.first_name} #{author.last_name}
   
