@@ -21,3 +21,11 @@ script.
   $('#'+value).append(authorText);
 
     //- textarea.textDescription(id="description", name="description", value = "#{book.description}")
+
+
+bookForm.jade
+for author,index in authors
+  input(type="hidden", id="authorName"+index, name="author"+index, value="#{author.first_name}")
+select#authorSelect(name="authorSelectNames[]" )
+  for author in authors
+    option(value="#{author.id}") #{author.first_name} #{author.last_name}

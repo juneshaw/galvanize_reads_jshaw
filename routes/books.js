@@ -30,8 +30,23 @@ router.post('/new', function(req, res, next) {
                   'cover_url': req.body.cover_url,
                   'description': req.body.description}
   db.insertBook(newBook).then( function(results) {
-    req.body.author.forEach(function(author, index) {
-      console.log('author in post for new book: ', author, 'id: ', index);
+
+    console.log('results from insertBook: ', results);
+      // db.insertBookContributors({'book_id': results.id,
+                                // 'author_id': author.id}).then(function() {
+      // })
+    // })
+  })
+})
+
+router.post('/new', function(req, res, next) {
+  db.insertBook(req.body).then(function(book_id) {
+    req.body.authors.forEach(function(author) {
+      db.insertBookContributors({'book_id': book_id,
+                                'author_id': author.id}).then(function() {
+        res.redirect('/books')
+      })
+
     })
 
     // db.Authors().count().then(function(author) {
@@ -73,13 +88,23 @@ router.post('/:id/delete', function(req, res, next) {
 
 router.get('/:id/edit', function(req, res, next) {
   db.book(req.params.id).first().then(function(book) {
-    db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
-      db.Authors().then(function(authors) {
-        res.render('books/edit',
-                    {'book': book,
-                      'bookContributors': bookContributors,
-                    'authors': authors,
-                    'errors': []})
+    db.Authors().then(function(authors) {
+      var bookAuthors =[];
+      db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
+        var numContributorsProcessed = 0;
+        bookContributors.forEach(function(bookContributor, contributorIndex) {
+          db.author(bookContributor.author_id).first().then(function(author) {
+            bookAuthors.push(author);
+            if (bookAuthors.length === bookContributors.length) {
+              res.render('books/edit',
+              {'book': book,
+              'bookContributors': bookContributors,
+              'bookAuthors': bookAuthors,
+              'authors': authors,
+              'errors': []})
+            }
+          })
+        })
       })
     })
   })
@@ -91,10 +116,14 @@ router.post('/:id/edit', function(req, res, next) {
       genre: req.body.genre,
       cover_url: req.body.cover_url,
       description: req.body.description}).then( function() {
-    db.Authors().count().then(function(count) {
-      console.log('author count: ', count);
-      res.redirect('/books/'+req.params.id)
+    console.log('req.body***********: ', req.body);
+    req.body.authorSelectNames.forEach(function(authorSelectName, index) {
+      console.log('author of array for new book: ', authorSelectName, 'index: ', index);
     })
+      // res.redirect('/books')
+    // db.Authors().count().then(function(count) {
+      // console.log('author count: ', count);
+    res.redirect('/books/'+req.params.id)
   })
 })
 
