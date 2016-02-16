@@ -29,8 +29,8 @@ script.
     if (!compareBook(value)) {
       var bookDiv = document.createElement('div');
       var bookId = "book" + value;
-      authorDiv.setAttribute("id", bookId);
-      authorDiv.setAttribute("value", value);
+      bookDiv.setAttribute("id", bookId);
+      bookDiv.setAttribute("value", value);
       
       $('#bookList').append(bookDiv);
       
@@ -38,7 +38,7 @@ script.
       var bookText = document.createElement('input');
       bookText.setAttribute("name", "bookSelectNames");
       bookText.setAttribute("value", bookName);
-      $(authorDiv).append(authorText);
+      $(bookDiv).append(bookText);
       
       var bookId = document.createElement('input');
       bookId.setAttribute("name", "bookSelectIds" );

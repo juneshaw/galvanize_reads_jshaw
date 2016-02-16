@@ -124,11 +124,11 @@ router.post('/:id/edit', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   // db.book(req.params.id).then(function(books) {
-    var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
-    bookAuthorPromise.then(function(booksAuthors) {
-      res.render('books/show',
-                  {'book': booksAuthors.booksAuthors})
-    })
+  var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
+  bookAuthorPromise.then(function(booksAuthors) {
+    res.render('books/show',
+                {'book': booksAuthors.booksAuthors})
+  })
   // })
 })
 

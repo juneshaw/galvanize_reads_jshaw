@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
                 {'authorsBooks': authorsBooks.authorsBooks})
     })
   })
-});
+})
 
 router.get('/new', function(req, res, next) {
     db.Books().then(function(books) {
@@ -23,7 +23,7 @@ router.get('/new', function(req, res, next) {
                   'books': books,
                   'errors': []})
   })
-});
+})
 
 router.post('/new', function(req, res, next) {
   var newAuthor = {'first_name':req.body.first_name,
@@ -52,8 +52,9 @@ router.get('/:id/delete', function(req, res, next) {
     authorBookPromise.then(function(authorsBooks) {
       res.render('authors/delete',
                   {'author': authorsBooks.authorsBooks})
+    })
   })
-});
+})
 
 router.post('/:id/delete', function(req, res, next) {
   db.bookContributorsByAuthor(req.params.id).del().then(function(bookContributors) {
@@ -61,7 +62,7 @@ router.post('/:id/delete', function(req, res, next) {
       res.redirect('/authors');
     })
   })
-});
+})
 
 router.get('/:id/edit', function(req, res, next) {
   db.author(req.params.id).first().then(function(author) {
@@ -93,7 +94,7 @@ router.get('/:id/edit', function(req, res, next) {
       })
     })
   })
-});
+})
 
 router.post('/:id/edit', function(req, res, next) {
   db.bookContributorsByAuthor(req.params.id).del().then(function(results) {
@@ -120,12 +121,11 @@ router.post('/:id/edit', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   // db.author(req.params.id).first().then(function(authors) {
-    var authorBookPromise = validation.authorsAndBooksOne(req.params.id);
-    authorBookPromise.then(function(authorsBooks) {
-      res.render('authors/show',
-                  {'author': authorsBooks.authorsBooks})
-    })
+  var authorBookPromise = validation.authorsAndBooksOne(req.params.id);
+  authorBookPromise.then(function(authorsBooks) {
+    res.render('authors/show',
+                {'author': authorsBooks.authorsBooks})
   })
-});
+})
 
 module.exports = router;
