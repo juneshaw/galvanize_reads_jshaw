@@ -20,9 +20,14 @@ script.
     
     var authorName = selectList[index].text;
     var authorText = document.createElement('input');
-    authorText.setAttribute("name", "authorSelectNames");
+    authorText.setAttribute("name", "authorSelectNames[]");
     authorText.setAttribute("value", authorName);
     $(authorDiv).append(authorText);
+    var authorId = document.createElement('input');
+    authorId.setAttribute("name", "authorSelectIds" );
+    authorId.setAttribute("type", "hidden" );
+    authorId.setAttribute("value", value);
+    $(authorDiv).append(authorId);
     
     var authorInput = document.getElementById('authorName' + value);
     authorInput.value = authorName;
@@ -39,7 +44,7 @@ script.
   }
 script.
   var fillAuthors = function(bookAuthors) {
-    bookAuthors.forEach(function(bookAuthor) {
+    bookAuthors.forEach(function(bookAuthor, bookAuthorIndex) {
       console.log('************bookAuthor: ', bookAuthor);
       var value = bookAuthor.id;
       var authorDiv = document.createElement('div');
@@ -50,9 +55,15 @@ script.
       
       var authorName = bookAuthor.first_name + " " + bookAuthor.last_name;
       var authorText = document.createElement('input');
-      authorText.setAttribute("name", "authorSelectNames");
+      authorText.setAttribute("name", "authorSelectNames" );
       authorText.setAttribute("value", authorName);
+      authorText.setAttribute("data-authorId", bookAuthor.id);
       $(authorDiv).append(authorText);
+      var authorId = document.createElement('input');
+      authorId.setAttribute("name", "authorSelectIds" );
+      authorId.setAttribute("type", "hidden" );
+      authorId.setAttribute("value", bookAuthor.id);
+      $(authorDiv).append(authorId);
       
       var removeId = document.createElement('button');
       var id = "btnRemove" + value;
@@ -95,6 +106,13 @@ fieldset
   label(for="authorList") Authors
   br
   div.textAuthors(id="authorList", name="authorList")
+    //- button.hiddenButton(type = "submit", name="authorSelectNames", value = 0)
+    //- button.hiddenButton(type = "submit", name="authorSelectNames", value = 0)
+    input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
+    input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
+    input(type='hidden', name="authorSelectIds", value = "0")
+    input(type='hidden', name="authorSelectIds", value = "0")
+
     //- for bookContributor in bookContributors
       //- #{fillAuthor(index, "junebug")}
   br

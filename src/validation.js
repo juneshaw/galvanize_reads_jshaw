@@ -24,8 +24,12 @@ booksAndAuthors: function(books) {
                         'authors': []};
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
+        console.log('BEFORE the call to get book cont');
         db.bookContributorsByBook(book.id).then(function(contributors) {
+          console.log('AFTER the call to get book cont');
+          console.log('contributors:::::', contributors);
           contributors.forEach(function(contributor, authorIndex) {
+            console.log('contributor!!!!!:::::', contributor);
             db.author(contributor.author_id).first().then(function(author) {
               booksAuthors[bookIndex]['authors'].push(author);
               if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
@@ -49,7 +53,9 @@ booksAndAuthorsOne: function(bookId) {
                         'authors': []};
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
+        console.log('BEFORE the call to get book cont');
         db.bookContributorsByBook(book.id).then(function(contributors) {
+          console.log('AFTER the call to get book cont');
           contributors.forEach(function(contributor, authorIndex) {
             db.author(contributor.author_id).first().then(function(author) {
               booksAuthors[bookIndex]['authors'].push(author);
