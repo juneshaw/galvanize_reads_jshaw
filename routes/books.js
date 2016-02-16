@@ -129,6 +129,7 @@ router.post('/:id/edit', function(req, res, next) {
         cover_url: req.body.cover_url,
         description: req.body.description}).then( function() {
         console.log('req.body***********: ', req.body);
+        db.deleteBookContributor
       req.body.authorSelectIds.forEach(function(authorSelectId, authorSelectIdIndex) {
         if (authorSelectId != 0) {
           db.insertBookContributor({'book_id': req.params.id,
