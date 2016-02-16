@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   db.Books().then(function(books) {
     var bookAuthorPromise = validation.booksAndAuthors(books);
     bookAuthorPromise.then(function(booksAuthors) {
+      console.log('in books get');
       res.render('books/index',
                 {'booksAuthors': booksAuthors.booksAuthors})
     })
@@ -78,19 +79,28 @@ router.get('/:id/edit', function(req, res, next) {
       var bookAuthors =[];
       db.bookContributorsByBook(req.params.id).then(function(bookContributors) {
         var numContributorsProcessed = 0;
-        bookContributors.forEach(function(bookContributor, contributorIndex) {
-          db.author(bookContributor.author_id).first().then(function(author) {
-            bookAuthors.push(author);
-            if (bookAuthors.length === bookContributors.length) {
-              res.render('books/edit',
-              {'book': book,
-              'bookContributors': bookContributors,
-              'bookAuthors': bookAuthors,
-              'authors': authors,
-              'errors': []})
-            }
+        if (bookContributors.length === 0) {
+          res.render('books/edit',
+          {'book': book,
+          'bookContributors': [],
+          'bookAuthors': [],
+          'authors': authors,
+          'errors': []})
+        } else {
+          bookContributors.forEach(function(bookContributor, contributorIndex) {
+            db.author(bookContributor.author_id).first().then(function(author) {
+              bookAuthors.push(author);
+              if (bookAuthors.length === bookContributors.length) {
+                res.render('books/edit',
+                {'book': book,
+                'bookContributors': bookContributors,
+                'bookAuthors': bookAuthors,
+                'authors': authors,
+                'errors': []})
+              }
+            })
           })
-        })
+        }
       })
     })
   })
@@ -104,12 +114,18 @@ router.post('/:id/edit', function(req, res, next) {
         cover_url: req.body.cover_url,
         description: req.body.description}).then( function() {
         console.log('req.body***********: ', req.body);
-      req.body.authorSelectNames.forEach(function(authorSelectName) {
-        console.log('author select name: ', authorSelectName);
-        if (authorSelectName !== "") {
+      req.body.authorSelectIds.forEach(function(authorSelectId, authorSelectIdIndex) {
+        console.log('author select id: ', authorSelectId, 'authorSelectIdIndex', authorSelectIdIndex);
+        if (authorSelectId != 0) {
           db.insertBookContributor({'book_id': req.params.id,
-                                    'author_id': authorSelectName.value}).then(function() {
+                                    'author_id': authorSelectId}).then(function() {
+            console.log('!!!!!!! authorSelectIdIndex', authorSelectIdIndex, 'req.body.authorSelectIds.length', req.body.authorSelectIds.length)
+            if (authorSelectIdIndex === req.body.authorSelectIds.length-1) {
+              res.redirect('/books');
+            }
           })
+        } else if (authorSelectIdIndex === req.body.authorSelectIds.length-1) {
+          res.redirect('/books');
         }
       })
     })

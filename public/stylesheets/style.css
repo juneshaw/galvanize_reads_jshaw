@@ -25,6 +25,10 @@ form input {
   width: 70%;
 }
 
+form button {
+  width: 70%;
+}
+
 textarea {
   width: 70%;
   height: 30px;
@@ -143,5 +147,6 @@ textarea {
 .show {display:block;}
 
 .hiddenButton {
+  width: 70%;
   display: none;
 }

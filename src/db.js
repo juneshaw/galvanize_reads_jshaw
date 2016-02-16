@@ -51,6 +51,7 @@ module.exports =
 },
 
   insertBookContributor: function(bookContributor) {
+    console.log('bookContributor in insert: ', bookContributor);
     return(this.BookContributors().insert(bookContributor));
 },
 
