@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var db = require('../src/db.js')
 var validation = require('../src/validation.js')
+var jquery = require('jquery')
 
 router.get('/', function(req, res, next) {
   db.Books().then(function(books) {
@@ -96,19 +97,32 @@ router.get('/:id/edit', function(req, res, next) {
 })
 
 router.post('/:id/edit', function(req, res, next) {
-  db.updateBook(req.params.id,
-    {title: req.body.title,
-      genre: req.body.genre,
-      cover_url: req.body.cover_url,
-      description: req.body.description}).then( function() {
-    console.log('req.body***********: ', req.body);
-    req.body.authorSelectNames.forEach(function(authorSelectName, index) {
-      console.log('author of array for new book: ', authorSelectName, 'index: ', index);
+  db.bookContributorsByBook(req.params.id).del().then(function(results) {
+    db.updateBook(req.params.id,
+      {title: req.body.title,
+        genre: req.body.genre,
+        cover_url: req.body.cover_url,
+        description: req.body.description}).then( function() {
+        console.log('req.body***********: ', req.body);
+      req.body.authorSelectNames.forEach(function(authorSelectName) {
+        console.log('author select name: ', authorSelectName);
+        if (authorSelectName !== "") {
+          db.insertBookContributor({'book_id': req.params.id,
+                                    'author_id': authorSelectName.value}).then(function() {
+          })
+        }
+      })
     })
+      // var authorSelectNames = req.form_name.elements["authorSelectNames[]"];
+      // req.body.authorSelectNames.forEach(function(authorSelectName, index) {
+        // res.redirect('/books/'+req.params.id)
+      // })
+    // })
+
+    // })
       // res.redirect('/books')
     // db.Authors().count().then(function(count) {
       // console.log('author count: ', count);
-    res.redirect('/books/'+req.params.id)
   })
 })
 
@@ -116,7 +130,6 @@ router.get('/:id', function(req, res, next) {
   db.book(req.params.id).then(function(books) {
     var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
     bookAuthorPromise.then(function(booksAuthors) {
-      console.log('booksAuthors: ****************', booksAuthors);
       res.render('books/show',
                   {'book': booksAuthors.booksAuthors})
     })

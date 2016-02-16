@@ -141,3 +141,7 @@ textarea {
 }
 
 .show {display:block;}
+
+.hiddenButton {
+  display: none;
+}
