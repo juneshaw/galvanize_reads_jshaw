@@ -5,8 +5,6 @@ include ../layout
       for book in booksAuthors
         section.bookSection
           section.bookCover
-            script.
-              console.log('book id: ', book.book.id)
             a(href="/books/#{book.book.id}")
               img(src="#{book.book.cover_url}")
           section.bookText
