@@ -19,8 +19,7 @@ module.exports =
 },
 
   insertAuthor: function (author) {
-    console.log('in insertAuthor');
-   return(this.Authors().insert(author));
+   return(this.Authors().insert(author).returning('id'));
 },
 
   author: function(id) {
@@ -36,7 +35,7 @@ module.exports =
 },
 
   insertBook: function(book) {
-  return(this.Books().insert(book));
+  return(this.Books().insert(book).returning('id'));
 },
 
   book: function(id) {
@@ -52,8 +51,7 @@ module.exports =
 },
 
   insertBookContributor: function(bookContributor) {
-    console.log('bookContributor in insert: ', bookContributor);
-    return(this.BookContributors().insert(bookContributor));
+    return(this.BookContributors().insert(bookContributor).returning('id'));
 },
 
   bookContributor: function (id) {
@@ -69,7 +67,7 @@ module.exports =
 },
 
   insertUser: function (user) {
-    return(this.Users().insert(user));
+    return(this.Users().insert(user).returning('id'));
 },
 
   user: function(id) {
