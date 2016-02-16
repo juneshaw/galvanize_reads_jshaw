@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
   db.Books().then(function(books) {
     var bookAuthorPromise = validation.booksAndAuthors(books);
     bookAuthorPromise.then(function(booksAuthors) {
-      console.log('in books get');
       res.render('books/index',
                 {'booksAuthors': booksAuthors.booksAuthors})
     })
@@ -27,17 +26,16 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/new', function(req, res, next) {
-  console.log('in the new post: req.body: ', req.body);
+  console.log('req.body in new post: ', req.body);
   var newBook = {'title':req.body.title,
   'genre': req.body.genre,
   'cover_url': req.body.cover_url,
   'description': req.body.description}
+  console.log('BEFORE the insert book');
   db.insertBook(newBook).then(function(book) {
-    console.log('||||||||||||new insert book id: ', book);
-    console.log('after getting the authorSelectIDs: ', req.body.authorSelectIds);
-    console.log('req author length: ', req.body.authorSelectIds.length);
+    console.log('AFTER the insert book');
     req.body.authorSelectIds.forEach(function(authorSelectId, authorSelectIdIndex) {
-      console.log('each authorSelectID: ', authorSelectId);
+      console.log('bookContributor: ', book[0], ' ', authorSelectId);
       if (authorSelectId != 0) {
         db.insertBookContributor({'book_id': book[0],
                                   'author_id': authorSelectId}).then(function() {
@@ -62,11 +60,8 @@ router.get('/:id/delete', function(req, res, next) {
 })
 
 router.post('/:id/delete', function(req, res, next) {
-  console.log('in the delete****');
   db.bookContributorsByBook(req.params.id).del().then(function(bookContributors) {
-    console.log('after the delete of book contributors');
     db.deleteBook(req.params.id).then(function() {
-      console.log('deleting req.params.id****', req.params.id);
       res.redirect('/books');
     })
   })
@@ -111,7 +106,6 @@ router.post('/:id/edit', function(req, res, next) {
         genre: req.body.genre,
         cover_url: req.body.cover_url,
         description: req.body.description}).then( function() {
-        console.log('req.body***********: ', req.body);
       req.body.authorSelectIds.forEach(function(authorSelectId, authorSelectIdIndex) {
         if (authorSelectId != 0) {
           db.insertBookContributor({'book_id': req.params.id,
@@ -129,13 +123,13 @@ router.post('/:id/edit', function(req, res, next) {
 })
 
 router.get('/:id', function(req, res, next) {
-  db.book(req.params.id).then(function(books) {
+  // db.book(req.params.id).then(function(books) {
     var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
     bookAuthorPromise.then(function(booksAuthors) {
       res.render('books/show',
                   {'book': booksAuthors.booksAuthors})
     })
-  })
+  // })
 })
 
 module.exports = router;

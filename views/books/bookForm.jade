@@ -1,8 +1,6 @@
 script.
   var removeAuthor = function(authorDiv, authorId) {
     $(authorDiv).remove();
-    //- var authorInput = document.getElementById('authorName'+authorId);
-    //- authorInput.value="";
   }
   
 script.
@@ -21,14 +19,17 @@ script.
   
 script.
   var addAuthor = function() {
-    
-    var authorList = document.getElementById('authorList');  //
+    console.log('in addAuthor');
+    var authorList = document.getElementById('authorList');
     
     var selectList = document.getElementById('authorSelect');
     var index = selectList.selectedIndex;
     var value = selectList[index].value;
 
+    console.log('seeing if the author is there');
     if (!compareAuthor(value)) {
+      console.log('author was not there');
+      
       var authorDiv = document.createElement('div');
       var authorId = "author" + value;
       authorDiv.setAttribute("id", authorId);
@@ -40,7 +41,6 @@ script.
       var authorText = document.createElement('input');
       authorText.setAttribute("name", "authorSelectNames");
       authorText.setAttribute("value", authorName);
-      //- authorText.setAttribute("data-authorId", value);
       $(authorDiv).append(authorText);
       
       var authorId = document.createElement('input');
@@ -59,12 +59,14 @@ script.
       removeId.innerHTML = "Remove";
       $(authorDiv).append(removeId);
     }
+    else {
+      console.log('author was already there');
+    }
   }
   
 script.
   var fillAuthors = function(bookAuthors) {
     bookAuthors.forEach(function(bookAuthor, bookAuthorIndex) {
-      console.log('************bookAuthor: ', bookAuthor);
       var value = bookAuthor.id;
       var authorDiv = document.createElement('div');
       var authorId = "author" + value;
@@ -119,7 +121,6 @@ fieldset
   label(for="description") Description
   br
   input.textDescription(type = "text", id="description", name="description", value  = "#{book.description}")
-  //- textarea.textDescription(id="description", name="description", value = "#{book.description}")
   br
   br
   label(for="authorList") Authors
@@ -127,15 +128,7 @@ fieldset
   div.textAuthors(id="authorList", name="authorList")
     input(type='hidden', name="authorSelectIds", value = "0")
     input(type='hidden', name="authorSelectIds", value = "0")
-    //- input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
-    //- input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
-
-    //- for bookContributor in bookContributors
-      //- #{fillAuthor(index, "junebug")}
   br
-
-  //- for author,index in authors
-    //- input(type="hidden", id="authorName"+index, name="authorSelectListNames", value="#{author.first_name}")
   select#authorSelect
     for author in authors
       option(value="#{author.id}") #{author.first_name} #{author.last_name}
