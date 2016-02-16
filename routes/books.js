@@ -130,17 +130,15 @@ router.post('/:id/edit', function(req, res, next) {
         description: req.body.description}).then( function() {
         console.log('req.body***********: ', req.body);
       req.body.authorSelectIds.forEach(function(authorSelectId, authorSelectIdIndex) {
-        console.log('author select id: ', authorSelectId, 'authorSelectIdIndex', authorSelectIdIndex);
         if (authorSelectId != 0) {
           db.insertBookContributor({'book_id': req.params.id,
                                     'author_id': authorSelectId}).then(function() {
-            console.log('!!!!!!! authorSelectIdIndex', authorSelectIdIndex, 'req.body.authorSelectIds.length', req.body.authorSelectIds.length)
             if (authorSelectIdIndex === req.body.authorSelectIds.length-1) {
-              res.redirect('/books');
+              res.redirect('/books/'+req.params.id);
             }
           })
         } else if (authorSelectIdIndex === req.body.authorSelectIds.length-1) {
-          res.redirect('/books');
+          res.redirect('/books/'+req.params.id);
         }
       })
     })

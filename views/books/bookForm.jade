@@ -4,44 +4,63 @@ script.
     //- var authorInput = document.getElementById('authorName'+authorId);
     //- authorInput.value="";
   }
+  
+script.
+  var compareAuthor = function(newAuthorId) {
+    var descendents = authorList.getElementsByTagName('*');
+    var foundId=false;
+    var descendentIndex=0;
+    while((descendentIndex<=descendents.length-1) && (!foundId)) {
+      if ((descendents[descendentIndex].name === "authorSelectIds") && (descendents[descendentIndex].value === newAuthorId)) {
+        foundId = true;
+      }
+      descendentIndex++;
+    }
+    return(foundId);
+  }
+  
 script.
   var addAuthor = function() {
+    
+    var authorList = document.getElementById('authorList');  //
+    
     var selectList = document.getElementById('authorSelect');
     var index = selectList.selectedIndex;
     var value = selectList[index].value;
-    
-    
-    var authorDiv = document.createElement('div');
-    var authorId = "author" + value;
-    authorDiv.setAttribute("id", authorId);
-    authorDiv.setAttribute("value", value);
-    
-    $('#authorList').append(authorDiv);
-    
-    var authorName = selectList[index].text;
-    var authorText = document.createElement('input');
-    authorText.setAttribute("name", "authorSelectNames[]");
-    authorText.setAttribute("value", authorName);
-    $(authorDiv).append(authorText);
-    var authorId = document.createElement('input');
-    authorId.setAttribute("name", "authorSelectIds" );
-    authorId.setAttribute("type", "hidden" );
-    authorId.setAttribute("value", value);
-    $(authorDiv).append(authorId);
-    
-    //- var authorInput = document.getElementById('authorName' + value);
-    //- authorInput.value = authorName;
-    
-    var removeId = document.createElement('button');
-    var id = "btnRemove" + value;
-    removeId.setAttribute("id", "btnRemove" + value);
-    removeId.setAttribute("class", "btnRemove");
-    removeId.setAttribute("type", "button");
-    removeId.setAttribute("value", value);
-    removeId.addEventListener('click', function(){removeAuthor(authorDiv, value)});
-    removeId.innerHTML = "Remove";
-    $(authorDiv).append(removeId);
+
+    if (!compareAuthor(value)) {
+      var authorDiv = document.createElement('div');
+      var authorId = "author" + value;
+      authorDiv.setAttribute("id", authorId);
+      authorDiv.setAttribute("value", value);
+      
+      $('#authorList').append(authorDiv);
+      
+      var authorName = selectList[index].text;
+      var authorText = document.createElement('input');
+      authorText.setAttribute("name", "authorSelectNames");
+      authorText.setAttribute("value", authorName);
+      //- authorText.setAttribute("data-authorId", value);
+      $(authorDiv).append(authorText);
+      
+      var authorId = document.createElement('input');
+      authorId.setAttribute("name", "authorSelectIds" );
+      authorId.setAttribute("type", "hidden" );
+      authorId.setAttribute("value", value);
+      $(authorDiv).append(authorId);
+      
+      var removeId = document.createElement('button');
+      //- var id = "btnRemove" + value;
+      removeId.setAttribute("id", "btnRemove" + value);
+      removeId.setAttribute("class", "btnRemove");
+      removeId.setAttribute("type", "button");
+      removeId.setAttribute("value", value);
+      removeId.addEventListener('click', function(){removeAuthor(authorDiv, value)});
+      removeId.innerHTML = "Remove";
+      $(authorDiv).append(removeId);
+    }
   }
+  
 script.
   var fillAuthors = function(bookAuthors) {
     bookAuthors.forEach(function(bookAuthor, bookAuthorIndex) {
@@ -66,7 +85,7 @@ script.
       $(authorDiv).append(authorId);
       
       var removeId = document.createElement('button');
-      var id = "btnRemove" + value;
+      //- var id = "btnRemove" + value;
       removeId.setAttribute("id", "btnRemove" + value);
       removeId.setAttribute("class", "btnRemove");
       removeId.setAttribute("type", "button");
@@ -106,12 +125,10 @@ fieldset
   label(for="authorList") Authors
   br
   div.textAuthors(id="authorList", name="authorList")
-    //- button.hiddenButton(type = "submit", name="authorSelectNames", value = 0)
-    //- button.hiddenButton(type = "submit", name="authorSelectNames", value = 0)
-    input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
-    input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
     input(type='hidden', name="authorSelectIds", value = "0")
     input(type='hidden', name="authorSelectIds", value = "0")
+    //- input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
+    //- input(type='hidden', name="authorSelectNames", value = "", data-authorId=0)
 
     //- for bookContributor in bookContributors
       //- #{fillAuthor(index, "junebug")}
