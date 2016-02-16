@@ -119,11 +119,11 @@ router.post('/:id/edit', function(req, res, next) {
           db.insertBookContributor({'book_id': req.params.id,
                                     'author_id': authorSelectId}).then(function() {
             if (authorSelectIdIndex === req.body.authorSelectIds.length-1) {
-              res.redirect('/books');
+              res.redirect('/books/'+req.params.id);
             }
           })
         } else if (authorSelectIdIndex === req.body.authorSelectIds.length-1) {
-          res.redirect('/books');
+          res.redirect('/books/'+req.params.id);
         }
       })
     })
