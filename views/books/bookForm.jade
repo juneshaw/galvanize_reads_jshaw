@@ -1,8 +1,8 @@
 script.
   var removeAuthor = function(authorDiv, authorId) {
     $(authorDiv).remove();
-    var authorInput = document.getElementById('authorName'+authorId);
-    authorInput.value="";
+    //- var authorInput = document.getElementById('authorName'+authorId);
+    //- authorInput.value="";
   }
 script.
   var addAuthor = function() {
@@ -29,8 +29,8 @@ script.
     authorId.setAttribute("value", value);
     $(authorDiv).append(authorId);
     
-    var authorInput = document.getElementById('authorName' + value);
-    authorInput.value = authorName;
+    //- var authorInput = document.getElementById('authorName' + value);
+    //- authorInput.value = authorName;
     
     var removeId = document.createElement('button');
     var id = "btnRemove" + value;
