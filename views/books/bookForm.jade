@@ -19,16 +19,13 @@ script.
   
 script.
   var addAuthor = function() {
-    console.log('in addAuthor');
     var authorList = document.getElementById('authorList');
     
     var selectList = document.getElementById('authorSelect');
     var index = selectList.selectedIndex;
     var value = selectList[index].value;
 
-    console.log('seeing if the author is there');
     if (!compareAuthor(value)) {
-      console.log('author was not there');
       
       var authorDiv = document.createElement('div');
       var authorId = "author" + value;
@@ -60,7 +57,6 @@ script.
       $(authorDiv).append(removeId);
     }
     else {
-      console.log('author was already there');
     }
   }
   

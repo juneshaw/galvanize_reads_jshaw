@@ -18,7 +18,7 @@ router.get('/new', function(req, res, next) {
     db.Books().then(function(books) {
       res.render('authors/new',
                   {'author': {first_name:'', last_name:'', biography:'', portrait_url:''},
-                    'bookContributors': [],
+                    // 'bookContributors': [],
                     'authorBooks': [],
                   'books': books,
                   'errors': []})
@@ -72,18 +72,16 @@ router.get('/:id/edit', function(req, res, next) {
         if (bookContributors.length === 0) {
           res.render('authors/edit',
           {'author': author,
-          'bookContributors': [],
           'authorBooks': [],
           'books': books,
           'errors': []})
         } else {
           bookContributors.forEach(function(bookContributor, contributorIndex) {
-            db.book(bookContributor.author_id).first().then(function(book) {
+            db.book(bookContributor.book_id).first().then(function(book) {
               authorBooks.push(book);
               if (authorBooks.length === bookContributors.length) {
                 res.render('authors/edit',
                 {'author': author,
-                'bookContributors': bookContributors,
                 'authorBooks': authorBooks,
                 'books': books,
                 'errors': []})
@@ -120,7 +118,6 @@ router.post('/:id/edit', function(req, res, next) {
 })
 
 router.get('/:id', function(req, res, next) {
-  // db.author(req.params.id).first().then(function(authors) {
   var authorBookPromise = validation.authorsAndBooksOne(req.params.id);
   authorBookPromise.then(function(authorsBooks) {
     res.render('authors/show',

@@ -87,7 +87,7 @@ script.
       removeId.setAttribute("class", "btnRemove");
       removeId.setAttribute("type", "button");
       removeId.setAttribute("value", value);
-      removeId.addEventListener('click', function(){removeAuthor(bookDiv, value)});
+      removeId.addEventListener('click', function(){removeBook(bookDiv, value)});
       removeId.innerHTML = "Remove";
       $(bookDiv).append(removeId);
     })

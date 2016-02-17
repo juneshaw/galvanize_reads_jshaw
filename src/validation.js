@@ -24,12 +24,8 @@ booksAndAuthors: function(books) {
                         'authors': []};
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
-        console.log('BEFORE the call to get book cont');
         db.bookContributorsByBook(book.id).then(function(contributors) {
-          console.log('AFTER the call to get book cont');
-          console.log('contributors:::::', contributors);
           contributors.forEach(function(contributor, authorIndex) {
-            console.log('contributor!!!!!:::::', contributor);
             db.author(contributor.author_id).first().then(function(author) {
               booksAuthors[bookIndex]['authors'].push(author);
               if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
@@ -53,9 +49,9 @@ booksAndAuthorsOne: function(bookId) {
                         'authors': []};
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
-        console.log('BEFORE the call to get book cont');
+        console.log('before bookCon call');
         db.bookContributorsByBook(book.id).then(function(contributors) {
-          console.log('AFTER the call to get book cont');
+          console.log('after bookCon call, contrs: ', contributors);
           contributors.forEach(function(contributor, authorIndex) {
             db.author(contributor.author_id).first().then(function(author) {
               booksAuthors[bookIndex]['authors'].push(author);
@@ -83,6 +79,7 @@ authorsAndBooks: function(authors) {
         var authorToAdd = {'author': author,
                         'books': []};
         authorsBooks.push(authorToAdd);
+        authorsBooks[authorIndex]['books'] = [];
         db.bookContributorsByAuthor(author.id).then(function(contributors) {
           contributors.forEach(function(contributor, bookIndex) {
             db.book(contributor.book_id).first().then(function(book) {
@@ -104,19 +101,17 @@ authorsAndBooksOne: function(authorId) {
     var books = [];
     db.Authors().then(function(authors) {
       authors.forEach(function(author, authorIndex) {
-        console.log('************');
         var authorToAdd = {'author': author,
                         'books': []};
-        console.log('getting books for author # ', authorIndex, author.id, ' ', author.first_name);
         authorsBooks.push(authorToAdd);
+        authorsBooks[authorIndex]['books'] = [];
+        console.log('before bookCon call');
         db.bookContributorsByAuthor(author.id).then(function(contributors) {
+          console.log('after bookCon call, contrs: ', contributors);
           contributors.forEach(function(contributor, bookIndex) {
             db.book(contributor.book_id).first().then(function(book) {
-              console.log('==============');
-              console.log('book#', bookIndex, ' ', book, ' for that author');
               authorsBooks[authorIndex]['books'].push(book);
               if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
-                console.log('finished on authorIndex of ', authorIndex, 'bookIndex of ', bookIndex);
                 authorsBooks.forEach(function(authorBook, index) {
                   if (authorBook.author.id == authorId) {
                     resolve({'authorsBooks': authorsBooks[index]});

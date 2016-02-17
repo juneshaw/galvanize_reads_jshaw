@@ -18,7 +18,7 @@ router.get('/new', function(req, res, next) {
     db.Authors().then(function(authors) {
       res.render('books/new',
                   {'book': {'title':'', 'genre':'', 'cover_url':'', 'description':''},
-                  'bookContributors': [],
+                  // 'bookContributors': [],
                   'bookAuthors': [],
                   'authors': authors,
                   'errors': []})
@@ -26,16 +26,12 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/new', function(req, res, next) {
-  console.log('req.body in new post: ', req.body);
   var newBook = {'title':req.body.title,
   'genre': req.body.genre,
   'cover_url': req.body.cover_url,
   'description': req.body.description}
-  console.log('BEFORE the insert book');
   db.insertBook(newBook).then(function(book) {
-    console.log('AFTER the insert book');
     req.body.authorSelectIds.forEach(function(authorSelectId, authorSelectIdIndex) {
-      console.log('bookContributor: ', book[0], ' ', authorSelectId);
       if (authorSelectId != 0) {
         db.insertBookContributor({'book_id': book[0],
                                   'author_id': authorSelectId}).then(function() {
@@ -75,7 +71,6 @@ router.get('/:id/edit', function(req, res, next) {
         if (bookContributors.length === 0) {
           res.render('books/edit',
           {'book': book,
-          'bookContributors': [],
           'bookAuthors': [],
           'authors': authors,
           'errors': []})
@@ -86,7 +81,6 @@ router.get('/:id/edit', function(req, res, next) {
               if (bookAuthors.length === bookContributors.length) {
                 res.render('books/edit',
                 {'book': book,
-                'bookContributors': bookContributors,
                 'bookAuthors': bookAuthors,
                 'authors': authors,
                 'errors': []})
@@ -123,13 +117,11 @@ router.post('/:id/edit', function(req, res, next) {
 })
 
 router.get('/:id', function(req, res, next) {
-  // db.book(req.params.id).then(function(books) {
   var bookAuthorPromise = validation.booksAndAuthorsOne(req.params.id);
   bookAuthorPromise.then(function(booksAuthors) {
     res.render('books/show',
                 {'book': booksAuthors.booksAuthors})
   })
-  // })
 })
 
 module.exports = router;
