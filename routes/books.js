@@ -94,7 +94,9 @@ router.get('/:id/edit', function(req, res, next) {
 })
 
 router.post('/:id/edit', function(req, res, next) {
+  console.log('in edit');
   db.bookContributorsByBook(req.params.id).del().then(function(results) {
+    console.log('after delete of book cons');
     db.updateBook(req.params.id,
       {title: req.body.title,
         genre: req.body.genre,
