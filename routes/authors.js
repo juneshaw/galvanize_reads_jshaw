@@ -34,7 +34,7 @@ router.post('/new', function(req, res, next) {
     req.body.bookSelectIds.forEach(function(bookSelectId, bookSelectIdIndex) {
       if (bookSelectId != 0) {
         db.insertBookContributor({'author_id': author[0],
-                                  'book_id': bookSelectId}).then(function() {
+                                  'book_id': bookSelectId}).then(function(results) {
           if (bookSelectIdIndex === req.body.bookSelectIds.length-1) {
             res.redirect('/authors');
           }
@@ -104,7 +104,7 @@ router.post('/:id/edit', function(req, res, next) {
       req.body.bookSelectIds.forEach(function(bookSelectId, bookSelectIdIndex) {
         if (bookSelectId != 0) {
           db.insertBookContributor({'author_id': req.params.id,
-                                    'book_id': bookSelectId}).then(function() {
+                                    'book_id': bookSelectId}).then(function(results) {
             if (bookSelectIdIndex === req.body.bookSelectIds.length-1) {
               res.redirect('/authors/'+req.params.id);
             }

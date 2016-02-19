@@ -25,14 +25,18 @@ booksAndAuthors: function(books) {
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
         db.bookContributorsByBook(book.id).then(function(contributors) {
-          contributors.forEach(function(contributor, authorIndex) {
-            db.author(contributor.author_id).first().then(function(author) {
-              booksAuthors[bookIndex]['authors'].push(author);
-              if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
-                resolve({'booksAuthors': booksAuthors});
-              }
+          if ((!contributors.length) && (bookIndex>=books.length-1)) {
+            resolve({'booksAuthors': booksAuthors});
+          } else {
+            contributors.forEach(function(contributor, authorIndex) {
+              db.author(contributor.author_id).first().then(function(author) {
+                booksAuthors[bookIndex]['authors'].push(author);
+                if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
+                  resolve({'booksAuthors': booksAuthors});
+                }
+              })
             })
-          })
+          }
         })
       })
     })
@@ -49,21 +53,23 @@ booksAndAuthorsOne: function(bookId) {
                         'authors': []};
         booksAuthors.push(bookToAdd);
         booksAuthors[bookIndex]['authors'] = [];
-        console.log('before bookCon call');
         db.bookContributorsByBook(book.id).then(function(contributors) {
-          console.log('after bookCon call, contrs: ', contributors);
-          contributors.forEach(function(contributor, authorIndex) {
-            db.author(contributor.author_id).first().then(function(author) {
-              booksAuthors[bookIndex]['authors'].push(author);
-              if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
-                booksAuthors.forEach(function(bookAuthor, index) {
-                  if (bookAuthor.book.id == bookId) {
-                    resolve({'booksAuthors': booksAuthors[index]});
-                  }
-                })
-              }
+          if ((!contributors.length) && (bookIndex>=books.length-1)) {
+            resolve({'booksAuthors': booksAuthors[book_index]});
+          } else {
+            contributors.forEach(function(contributor, authorIndex) {
+              db.author(contributor.author_id).first().then(function(author) {
+                booksAuthors[bookIndex]['authors'].push(author);
+                if ((authorIndex >= (contributors.length-1)) && (bookIndex >= (books.length-1))) {
+                  booksAuthors.forEach(function(bookAuthor, index) {
+                    if (bookAuthor.book.id == bookId) {
+                      resolve({'booksAuthors': booksAuthors[index]});
+                    }
+                  })
+                }
+              })
             })
-          })
+          }
         })
       })
     })
@@ -81,14 +87,18 @@ authorsAndBooks: function(authors) {
         authorsBooks.push(authorToAdd);
         authorsBooks[authorIndex]['books'] = [];
         db.bookContributorsByAuthor(author.id).then(function(contributors) {
-          contributors.forEach(function(contributor, bookIndex) {
-            db.book(contributor.book_id).first().then(function(book) {
-              authorsBooks[authorIndex]['books'].push(book);
-              if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
-                resolve({'authorsBooks': authorsBooks});
-              }
+          if ((!contributors.length) && (authorIndex>=authors.length-1)) {
+            resolve({'authorsBooks': authorsBooks});
+          } else {
+            contributors.forEach(function(contributor, bookIndex) {
+              db.book(contributor.book_id).first().then(function(book) {
+                authorsBooks[authorIndex]['books'].push(book);
+                if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
+                  resolve({'authorsBooks': authorsBooks});
+                }
+              })
             })
-          })
+          }
         })
       })
     })
@@ -105,21 +115,23 @@ authorsAndBooksOne: function(authorId) {
                         'books': []};
         authorsBooks.push(authorToAdd);
         authorsBooks[authorIndex]['books'] = [];
-        console.log('before bookCon call');
         db.bookContributorsByAuthor(author.id).then(function(contributors) {
-          console.log('after bookCon call, contrs: ', contributors);
-          contributors.forEach(function(contributor, bookIndex) {
-            db.book(contributor.book_id).first().then(function(book) {
-              authorsBooks[authorIndex]['books'].push(book);
-              if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
-                authorsBooks.forEach(function(authorBook, index) {
-                  if (authorBook.author.id == authorId) {
-                    resolve({'authorsBooks': authorsBooks[index]});
-                  }
-                })
-              }
+          if ((!contributors.length) && (authorIndex>=authors.length-1)) {
+            resolve({'authorsBooks': authorsBooks[author_index]});
+          } else {
+            contributors.forEach(function(contributor, bookIndex) {
+              db.book(contributor.book_id).first().then(function(book) {
+                authorsBooks[authorIndex]['books'].push(book);
+                if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
+                  authorsBooks.forEach(function(authorBook, index) {
+                    if (authorBook.author.id == authorId) {
+                      resolve({'authorsBooks': authorsBooks[index]});
+                    }
+                  })
+                }
+              })
             })
-          })
+          }
         })
       })
     })
