@@ -80,18 +80,20 @@ authorsAndBooks: function(authors) {
   return new Promise(function (resolve, reject) {
     var authorsBooks = [];
     var books = [];
-    return db.Authors().then(function(authors) {
+    db.Authors().then(function(authors) {
       authors.forEach(function(author, authorIndex) {
+        console.log('outer authorIndex: ', authorIndex);
         var authorToAdd = {'author': author,
                         'books': []};
         authorsBooks.push(authorToAdd);
         authorsBooks[authorIndex]['books'] = [];
-        return db.bookContributorsByAuthor(author.id).then(function(contributors) {
+         db.bookContributorsByAuthor(author.id).then(function(contributors) {
+          console.log('inner authorIndex: ', authorIndex);
           if ((!contributors.length) && (authorIndex>=authors.length-1)) {
             resolve({'authorsBooks': authorsBooks});
           } else {
             contributors.forEach(function(contributor, bookIndex) {
-              return db.book(contributor.book_id).first().then(function(book) {
+              db.book(contributor.book_id).first().then(function(book) {
                 authorsBooks[authorIndex]['books'].push(book);
                 if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
                   resolve({'authorsBooks': authorsBooks});
@@ -109,24 +111,26 @@ authorsAndBooksOne: function(authorId) {
   return new Promise(function (resolve, reject) {
     var authorsBooks = [];
     var books = [];
-    return db.Authors().then(function(authors) {
+    db.Authors().then(function(authors) {
       authors.forEach(function(author, authorIndex) {
+        console.log('outer authorIndex=', authorIndex);
         var authorToAdd = {'author': author,
                         'books': []};
         authorsBooks.push(authorToAdd);
         authorsBooks[authorIndex]['books'] = [];
-        return db.bookContributorsByAuthor(author.id).then(function(contributors) {
+        db.bookContributorsByAuthor(author.id).then(function(contributors) {
+          console.log('inner authorIndex=', authorIndex);
           if ((!contributors.length) && (authorIndex>=authors.length-1)) {
             resolve({'authorsBooks': authorsBooks[author_index]});
           } else {
             contributors.forEach(function(contributor, bookIndex) {
-              return db.book(contributor.book_id).first().then(function(book) {
-                authorsBooks[authorIndex]['books'].push(book);
-                if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
-                  authorsBooks.forEach(function(authorBook, index) {
-                    if (authorBook.author.id == authorId) {
-                      resolve({'authorsBooks': authorsBooks[index]});
-                    }
+            db.book(contributor.book_id).first().then(function(book) {
+              authorsBooks[authorIndex]['books'].push(book);
+              if ((authorIndex >= (authors.length-1)) && (bookIndex >= (contributors.length-1))) {
+                authorsBooks.forEach(function(authorBook, index) {
+                  if (authorBook.author.id == authorId) {
+                    resolve({'authorsBooks': authorsBooks[index]});
+                  }
                   })
                 }
               })
