@@ -1,4 +1,4 @@
-# galvanize-reads-jshaw
+# GALVANIZE READS
 
 ##_Deployment_
 https://galvanize-reads-jshaw.herokuapp.com/
