@@ -1,8 +1,20 @@
 # galvanize-reads-q2
 
-Deployed:
+##Deployed:
 https://galvanize-reads-jshaw.herokuapp.com/
-Github:
-git@github.com:junegradtshaw/galvanize-reads-q2.git
+##Github:
+git@github.com:juneshaw/galvanize-reads-jshaw.git
 Description:
-https://coursework.galvanize.com/users/895/learning_experiences/1123
+Galvanize Reads is a book catalog service that stores a list of recommended technology books. It allows you to:
+*List books and authors
+*Add books and authors
+Modify books and authors
+*Remove books and authors
+
+##Technology
+HTML/CSS, Jade, Express, Node.js, postgreSQL with CRUD.
+MVC.
+AJAX/RESTful services. HTTP Asynchronous processing.
+Server side templating.
+Knex ORM for postgreSQL database connection.
+Pivotal tracker planning tool.
