@@ -14,6 +14,7 @@ Modify books and authors
 * Remove books and authors
 
 ##_Technology_
+**_Technology_
 * HTML/CSS, Jade, Express, Node.js, postgreSQL with CRUD.
 MVC.
 * AJAX/RESTful services.
