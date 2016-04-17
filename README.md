@@ -21,3 +21,6 @@ MVC.
 * Server side templating.
 * Knex ORM for postgreSQL database connection.
 * Pivotal tracker planning tool.
+
+##_Seeds_
+* Seed files for authors and books can be run to reset the book-author associations to initial configuration.
